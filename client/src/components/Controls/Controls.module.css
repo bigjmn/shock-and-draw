@@ -1,0 +1,16 @@
+.controlWrapper{
+  width: 600px;
+
+
+}
+.colorWrapper{
+
+  height: 50px;
+  float: left;
+}
+.sizetrashWrapper{
+
+  height: 50px;
+  display: flex;
+  flex-wrap: nowrap;
+}

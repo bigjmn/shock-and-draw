@@ -1,0 +1,124 @@
+*{
+  box-sizing: border-box;
+}
+.gameContainer{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  padding: 5px;
+  border: 1px solid;
+
+}
+
+.topBar{
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+
+
+
+
+
+}
+.middleBar{
+  /* display: flex;
+  flex-direction: row; */
+  /* white-space: nowrap; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+
+
+
+
+}
+
+
+.roundclockContainer{
+  /* border: 1px dashed; */
+  height: 60px;
+  width: 80px;
+  margin-left: 10px;
+  float: left;
+
+}
+.bonusclockContainer{
+  /* border: 1px dashed; */
+  height: 60px;
+  width: 120px;
+  margin-left: 10px;
+  float: left;
+
+}
+.wordboxContainer{
+  /* border: 1px dashed; */
+
+  height: 60px;
+  width: 400px;
+  margin-left: 10px;
+  float: left;
+  font-size: 32px;
+
+}
+.passbuttonContainer{
+  /* border: 1px dashed; */
+
+  height: 60px;
+  width: 80px;
+  margin-left: 10px;
+  float: left;
+
+}
+.scorecardContainer{
+  /* border: 1px dashed; */
+
+  height: 60px;
+  width: 120px;
+  margin-left: 10px;
+  float: left;
+
+}
+
+.messageContainer{
+  width: 240px;
+  height: 500px;
+  /* border: 1px dashed; */
+  float: left;
+  margin-left: 10px;
+
+
+}
+.canvasContainer{
+  width: 500px;
+  height: 600px;
+  /* border: 1px dashed; */
+  float: left;
+  margin-left: 10px;
+
+}
+
+.attackZoneContainer{
+  width: 300px;
+  height: 500px;
+  /* border: 1px dashed; */
+  float: left;
+  margin-left: 10px;
+  overflow-y: auto;
+
+}
+.playerTagContainer{
+  width: 120px;
+  height: 500px;
+  /* border: 1px dashed; */
+  float: left;
+}
+.roundContainer{
+  width: 140px;
+  height: 60px;
+  /* border: 1px dashed; */
+  float: left;
+}

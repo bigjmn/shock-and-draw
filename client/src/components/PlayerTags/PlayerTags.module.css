@@ -1,0 +1,14 @@
+.playerTagWrapper{
+  width: 120px;
+  height: 500px;
+}
+.tagListWrapper{
+  width: 120px;
+  height: 300px;
+}
+.tagStyle{
+  width: 120px;
+  height: 40px;
+  border: 1px solid;
+  border-color: black;
+}

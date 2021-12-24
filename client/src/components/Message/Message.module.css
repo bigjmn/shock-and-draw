@@ -1,0 +1,21 @@
+.nameStyle{
+  font-weight: 600;
+
+}
+.wordStyle{
+  color: green;
+  font-weight: 300;
+}
+.redactStyle{
+  font-weight: 600;
+  font-style: italic;
+
+}
+.messageHolder{
+  margin-top: 5px;
+  clear: both;
+}
+.messageHolder p{
+  float: left;
+
+}

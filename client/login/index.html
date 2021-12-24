@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title></title>
+  </head>
+  <body>
+    <div class="optionContainer">
+      <form class="" action="/create" method="post">
+        <input type="submit" name="" value="Create Room" class="centerbutton" >
+
+      </form>
+      <button type='button' id='toggleSlide' class='centerbutton'>RULES</button>
+      <button type="button" id="previewAttacks" class='centerbutton'>PREVIEW ATTACKS</button>
+
+    </div>
+    <div id='slideandback'>
+      <div class='backbuttonwrapper'><button class='backtomain'>X</button></div>
+    <div id="slideshowContainer">
+      <div class='sidePanel'>
+        <button type="button" class="navbutton" id='leftbutton'></button>
+      </div>
+      <div id="mainPanel">
+        <div class="slide" id="slide0">
+          <p>Every round, each team has a designated drawer
+           who tries to get the rest of the team to guess the team's given word.</p>
+           <p><strong>Both teams play at the same time</strong> but player's only see the canvas, word, and chat window for their own team.</p>
+
+        </div>
+        <div class="slide" id='slide1'>
+          <p>When a word is guessed correctly, the team is given a point and assigned a new word. Each teams try to score as many points as possible before the round timer expires.</p>
+          <p>If a team guesses the word before the <strong>bonus timer</strong> expires, the opposing team is hit with an attack.</p>
+          A drawer can also <strong>pass</strong> on a word, but doing so causes his own team to take an attack.
+        </div>
+        <div class="slide" id='slide2'>
+          <p>Each attack has a unique effect that hinders the attacked team in some way. The attack lasts until the attack timer expires (or until the end of the round.) You can preview the different attacks on the homepage.</p>
+
+
+        </div>
+        <div class="slide" id='slide3'>
+          <p>When all the rounds are complete, the team with the most points wins.</p>
+          <p>The total number of rounds is chosen before the start of the game.
+          Durations of the round timer, bonus timer, and attack timer can be modified as well.</p>
+        </div>
+
+      </div>
+      <div class='sidePanel'>
+        <button type="button" class="navbutton" id='rightbutton'></button>
+      </div>
+
+    </div>
+    </div>
+
+    <script src='./homepage.js'>
+
+    </script>
+
+
+  </body>
+</html>

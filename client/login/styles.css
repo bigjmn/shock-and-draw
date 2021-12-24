@@ -1,0 +1,44 @@
+*{
+  box-sizing: border-box;
+}
+.sidePanel{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 100px;
+}
+#slideshowContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+
+
+}
+#slideandback{
+  display: none;
+  border: 1px dashed;
+}
+.navbutton{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.slide{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:flex-start;
+  width: 100%;
+  height: 100%;
+  display: none;
+  padding: 10px;
+
+}
+#mainPanel{
+  border: 1px dashed;
+  width: 600px;
+  height: 600px;
+}

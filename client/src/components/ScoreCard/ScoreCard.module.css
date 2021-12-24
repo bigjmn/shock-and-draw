@@ -1,0 +1,11 @@
+.pointsContainer{
+  height: 60px;
+  width: 120px;
+}
+
+.teampointsContainer{
+  height: 100%;
+  width: 50%;
+  float: left;
+  text-align: center;
+}

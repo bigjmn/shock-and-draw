@@ -1,0 +1,17 @@
+.teamListContainer{
+  display: flex;
+}
+.optionsContainer{
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  justify-content: space-around;
+}
+.teamList{
+  width: 300px;
+  height: 700px;
+}
+.hostZoneContainer{
+  width: 100px;
+  height: 700px;
+}

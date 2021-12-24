@@ -1,0 +1,15 @@
+.pointsRecapContainer{
+  display: flex;
+}
+.totalpointsHolder{
+  width: 100px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+.recapContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,10 @@
+.messageWrapper{
+  width:240px;
+  height:460px;
+  padding:5px;
+
+
+  border: 1px dashed;
+  overflow-y: auto;
+
+}

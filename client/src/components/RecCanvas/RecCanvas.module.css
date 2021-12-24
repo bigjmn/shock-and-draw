@@ -1,0 +1,8 @@
+.boardContainer{
+  position: absolute;
+  /* z-index: 2; */
+}
+.peepContainer{
+  position: absolute;
+  z-index: 3;
+}

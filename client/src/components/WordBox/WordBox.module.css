@@ -1,0 +1,16 @@
+.outerContainer{
+  height: 60px;
+  width: 400px;
+
+
+}
+.outerContainer h1{
+  font-size: 20px;
+  font-weight: 300
+
+}
+.outerContainer h2{
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 7px;
+}
