@@ -11,9 +11,16 @@ import AttackZone from '../../components/AttackZone/AttackZone.js'
 import PassButton from '../../components/PassButton/PassButton.js'
 import ScoreCard from '../../components/ScoreCard/ScoreCard.js'
 import PlayerTags from '../../components/PlayerTags/PlayerTags.js'
+import Player from '../../components/AudioPlayer/AudioPlayer.js'
 const GameRoom = (props) => {
 
   const [word, setWord] = useState(props.firstword)
+  const [showRight, setShowRight] = useState(false)
+
+  const showWord = () => {
+    setShowRight(true)
+    setTimeout(() => {socket.emit('getNext')}, 1000)
+  }
 
   useEffect(() => {
     socket.emit('readyforClock')
@@ -21,10 +28,15 @@ const GameRoom = (props) => {
 
   useEffect(() => {
     socket.on('takeWord', (data) => {
+      setShowRight(false)
       setWord(data.word)
+    })
+    socket.on('correct', () => {
+      showWord()
     })
     return () => {
       socket.off('takeWord')
+      socket.off('correct')
     }
   })
 
@@ -42,7 +54,7 @@ const GameRoom = (props) => {
           <BonusClock maxTime={props.bonusTime}/>
         </div>
         <div className={classes.wordboxContainer}>
-          <WordBox word={word} isDrawing={props.isDrawing}/>
+          <WordBox word={word} isDrawing={props.isDrawing} showRight={showRight}/>
         </div>
         <div className={classes.passbuttonContainer}>
           <PassButton isDrawing={props.isDrawing}/>
@@ -71,6 +83,7 @@ const GameRoom = (props) => {
           <AttackZone maxTime={props.attackTime} />
         </div>
       </div>
+      <Player />
 
     </div>
   )

@@ -28,6 +28,7 @@ module.exports = function(io, socket){
       correct: true,
       passmessage: false
     })
+    io.to(team.room).emit('correct')
     socket.user.correct++
     io.emit('takePoints', {color: team.name})
 
@@ -35,9 +36,12 @@ module.exports = function(io, socket){
       //bounce empty event off guesser for handling ease
       socket.emit('attackBounce')
     }
+
+
+
+  })
+  socket.on('getNext', () => {
     nextWord(io, socket)
-
-
   })
 
   socket.on('passWord', () => {

@@ -8,11 +8,28 @@
     <title></title>
   </head>
   <body>
+    <div class="homepageWrapper">
+      <h1>SHOCK AND DRAW</h1>
+
+
     <div class="optionContainer">
       <form class="" action="/create" method="post">
         <input type="submit" name="" value="Create Room" class="centerbutton" >
 
       </form>
+      <button type='button' id='toggleCode' class='centerbutton'>enter room code</button>
+      <div id='inputCode' class="centerbutton">
+        <form class="" action="/join" method="post">
+
+
+        <label for="codeinput">enter code below</label>
+        <input id='codeinput' type="text" name="roomcode" value="">
+        <input type="submit" name="" value="Submit">
+        </form>
+
+      </div>
+
+
       <button type='button' id='toggleSlide' class='centerbutton'>RULES</button>
       <button type="button" id="previewAttacks" class='centerbutton'>PREVIEW ATTACKS</button>
 
@@ -51,6 +68,7 @@
         <button type="button" class="navbutton" id='rightbutton'></button>
       </div>
 
+    </div>
     </div>
     </div>
 

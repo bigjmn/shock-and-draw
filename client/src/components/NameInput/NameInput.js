@@ -17,6 +17,7 @@ const NameInput = ({setUsername, playernames}) => {
       return;
     }
     setErrMess('')
+    setUsername(name)
     socket.emit('newUsername', {username: name})
 
 

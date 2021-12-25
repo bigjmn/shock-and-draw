@@ -35,3 +35,14 @@ const toPage = (n) => {
     $('#rightbutton').hide()
   }
 }
+
+$('#toggleCode').on('click', () => {
+  $('#toggleCode').hide()
+  $('#inputCode').show()
+  $('#codeinput').focus()
+})
+
+$('#codeinput').blur(() => {
+  $('#inputCode').hide()
+  $('#toggleCode').show()
+})

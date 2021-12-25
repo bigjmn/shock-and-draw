@@ -1,11 +1,14 @@
 import socket from '../../context/socket.js'
 import classes from './JoinTeam.module.css'
-const JoinTeam = ({color}) => {
+const JoinTeam = ({color, username}) => {
 
   const teamname = color == 'red' ? 'RED TEAM' : 'BLUE TEAM'
 
 
   const handleClick = () => {
+    if (username == ''){
+      return
+    }
     socket.emit('joinTeam', {color:color})
 
   }

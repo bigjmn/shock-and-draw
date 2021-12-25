@@ -42,3 +42,25 @@
   width: 600px;
   height: 600px;
 }
+
+.centerbutton{
+  width: 220px;
+  height: 40px;
+  text-align: center;
+}
+.homepageWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: orange;
+}
+.optionContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#inputCode{
+  display: none;
+}

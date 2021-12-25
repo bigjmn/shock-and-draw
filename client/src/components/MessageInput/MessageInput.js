@@ -32,7 +32,7 @@ const MessageInput = ({isDrawing}) => {
 
   return(
     <form className={classes.guessform} onSubmit={handleSubmit}>
-      <input disabled={isDrawing} maxLength={32} className={classes.guessInput} type='text' value={message} onChange={handleChange}></input>
+      <input disabled={isDrawing} maxLength={32} className={classes.guessInput} type='text' value={message} onChange={handleChange} placeholder={isDrawing ? '' : 'Enter guess here'}></input>
     </form>
   )
 }

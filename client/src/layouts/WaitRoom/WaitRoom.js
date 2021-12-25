@@ -6,14 +6,18 @@ import NameInput from '../../components/NameInput/NameInput.js'
 
 import classes from './WaitRoom.module.css'
 
+
 const Waitroom =
 ({players, setPlayers, setGamestage, setBonusTime, setRoundTime, setAttackTime, roundTime, setNumRounds, numRounds, bonusTime, attackTime, username, setUsername, setTeamColor}) => {
 
   const [host, setHost] = useState(false)
+  const [roomcode, setRoomcode] = useState(null)
 
   const [undecided, setUndecided] = useState(true)
 
   const handleRoomData = (playerlist) => setPlayers(playerlist)
+
+
 
   useEffect(() => {
     socket.emit('getRoomData')
@@ -34,10 +38,14 @@ const Waitroom =
     })
     socket.on('takeNumRounds', (data) => {
       setNumRounds(data.numrounds)
+
     })
     socket.on('toGameroom', () => {
       console.log('gettinggameroom')
       socket.emit('getPreview')
+    })
+    socket.on('takeRoomCode', (data) => {
+      setRoomcode(data.roomcode)
     })
 
     return () => {
@@ -46,10 +54,12 @@ const Waitroom =
       socket.off('takeTimerData')
       socket.off('takeNumRounds')
       socket.off('toGameroom')
+      socket.off('takeRoomCode')
     }
 
   })
-  const countcolors = (userArr, col) => {
+  const countcolors = (userArray, col) => {
+    let userArr = userArray.filter(user => user.username != '')
     let totcount = userArr.reduce((tot, c) => (c.teamcolor == col ? tot+1 : tot), 0)
     console.log(totcount)
     return totcount
@@ -94,11 +104,12 @@ const Waitroom =
 
   return(
     <div>
+      <h2>Room Code: {roomcode}</h2>
 
       <div className={classes.teamListContainer}>
 
         <div className={classes.teamList} style={{backgroundColor:"#ff3b2d"}}>
-          <JoinTeam color='red' />
+          <JoinTeam color='red' username={username}/>
           {players.map((player) => (
             <div className='team-players' key={player.id}>
               {player.teamcolor == 'red' && <h2>{player.username}</h2>}
@@ -123,7 +134,7 @@ const Waitroom =
         </div>
 
         <div className={classes.teamList} style={{backgroundColor:"#2df1ff"}}>
-          <JoinTeam color='blue' />
+          <JoinTeam color='blue' username={username}/>
           {players.map((player) => (
             <div className='team-players' key={player.id}>
               {player.teamcolor == 'blue' && <h2>{player.username}</h2>}
@@ -169,6 +180,7 @@ const Waitroom =
 
 
           </form>
+
 
           {host && <HostButton playerUndecided={undecided} />}
         </div>

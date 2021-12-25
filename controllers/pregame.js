@@ -2,6 +2,7 @@ const teamify = require('../utils/Team.js')
 
 module.exports = function(io, socket){
   socket.on('getRoomData', () => {
+    io.emit('takeRoomCode', {roomcode:socket.lobby.roomcode})
 
 
     io.emit('takeRoomData', {players:socket.lobby.users})
@@ -15,6 +16,7 @@ module.exports = function(io, socket){
   })
 
   socket.on('newUsername', (data) => {
+    socket.leave('noname')
     socket.user.username = data.username
     console.log(socket.user)
     io.emit('takeRoomData', {players:socket.lobby.users})
@@ -53,6 +55,12 @@ module.exports = function(io, socket){
   })
 
   socket.on('startgame', () => {
+    console.log(socket.lobby.users.length)
+    io.in('noname').disconnectSockets()
+    console.log(socket.lobby.users.length)
+
+
+
 
     teamify(socket.lobby)
     socket.lobby.midgame = true;

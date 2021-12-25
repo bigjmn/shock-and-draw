@@ -1,9 +1,10 @@
-module.exports = function Lobby(roomid, urlpath, nsp){
+module.exports = function Lobby(roomid, urlpath, nsp, roomcode){
   return{
 
     roomid:roomid,
     urlpath:urlpath,
     nsp:nsp,
+    roomcode:roomcode,
     hostid:null,
     teams:null,
     round:0,
@@ -24,7 +25,10 @@ module.exports = function Lobby(roomid, urlpath, nsp){
 
 
     get host(){
-      return this.users[0].id
+      if (this.users[0]){
+        return this.users[0].id
+
+      }
     },
 
 
