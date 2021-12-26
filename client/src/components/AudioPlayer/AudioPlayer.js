@@ -26,8 +26,8 @@ const useAudio = url => {
 const Player = () => {
   const [playing, toggle] = useAudio(sound);
   useEffect(() => {
-    socket.on('correct', () => document.getElementById('clickplayer').click())
-    return () => socket.off('correct')
+    socket.on('correctsound', () => document.getElementById('clickplayer').click())
+    return () => socket.off('correctsound')
   })
 
   return (

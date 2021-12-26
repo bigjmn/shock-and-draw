@@ -29,6 +29,7 @@ module.exports = function(io, socket){
       passmessage: false
     })
     io.to(team.room).emit('correct')
+    io.to(team.room).emit('correctsound')
     socket.user.correct++
     io.emit('takePoints', {color: team.name})
 
@@ -41,6 +42,9 @@ module.exports = function(io, socket){
 
   })
   socket.on('getNext', () => {
+    if (socket.user.drawing == false){
+      return
+    }
     nextWord(io, socket)
   })
 
