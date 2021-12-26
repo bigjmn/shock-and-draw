@@ -1,7 +1,7 @@
 .cardContainer{
   display: flex;
   flex-direction: column;
-  
+
 
 
   border: 1px dashed;
@@ -25,7 +25,7 @@
 }
 .cardContainer h2{
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 600;
 
   margin: 2px;
 
