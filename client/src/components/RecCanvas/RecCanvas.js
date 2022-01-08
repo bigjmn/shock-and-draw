@@ -97,10 +97,12 @@ const RecCanvas = () => {
       />
 
 
+
     </div>
     <div className={classes.peepContainer}>
       {peepingtom && <PeepCanvas />}
     </div>
+
     </div>
 
   );

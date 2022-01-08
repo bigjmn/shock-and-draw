@@ -83,9 +83,10 @@ function Canvas() {
   function handleMouseDown(e) {
     setDrawing(true);
     setPosition({
-      x: parseInt(e.clientX - canvasOffset.x),
-      y: parseInt(e.clientY - canvasOffset.y),
+      x: parseInt(e.nativeEvent.offsetX),
+      y: parseInt(e.nativeEvent.offsetY),
     });
+    console.log(position)
     ctx.fillStyle = color
 
     ctx.beginPath()
@@ -109,8 +110,8 @@ function Canvas() {
   }
 
   const handleMouseMove = (e) => {
-    let mousex = e.clientX - canvasOffset.x;
-    let mousey = e.clientY - canvasOffset.y;
+    let mousex = e.nativeEvent.offsetX;
+    let mousey = e.nativeEvent.offsetY;
     if (drawing) {
       ctx.strokeStyle = color;
       ctx.lineWidth = thickness;
