@@ -1,4 +1,5 @@
 var currentPage;
+//I am merged
 
 $('#toggleSlide').on('click', () => {
   $('.optionContainer').hide()
