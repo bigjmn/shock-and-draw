@@ -72,13 +72,31 @@ const Canvas = ({word}) => {
     ctx.fillStyle = 'black'
     ctx.font = 'bold 42px serif'
     ctx.textAlign = 'center'
-    ctx.fillText('correct!', 250, 140)
+      ctx.fillText('CORRECT!', 250, 140)
     ctx.fillStyle = 'green'
     ctx.font = 'bold 42px serif'
     ctx.fillText(word+' ✔', 250, 260)
     setTimeout(() => {
       setFrozen(false)
       socket.emit('getNext')
+    }, 2000)
+  }
+
+  const passSign = () =>{
+    ctx.fillStyle = 'black'
+    ctx.fillRect(90, 90, 320, 220)
+    ctx.fillStyle = 'white'
+    ctx.fillRect(100,100,300,200)
+    ctx.fillStyle = 'black'
+    ctx.font = 'bold 42px serif'
+    ctx.textAlign = 'center'
+    ctx.fillText('PASS', 250, 140)
+    ctx.font = 'bold 42px serif'
+    ctx.fillText(word+' ❌', 250, 260)
+    setTimeout(() => {
+      setFrozen(false)
+      socket.emit('getNext')
+      socket.emit('hitme')
     }, 2000)
   }
 
@@ -97,12 +115,19 @@ const Canvas = ({word}) => {
       setFrozen(true)
       correctSign()
     })
+    socket.on('passmessage', () => {
+      setDrawing(false)
+      setFrozen(true)
+      passSign()
+    })
 
     return () => {
       socket.off('takeClear')
       socket.off('hidemouse')
       socket.off('hidemouseclear')
       socket.off('correct')
+      socket.off('passmessage')
+
     }
   })
 

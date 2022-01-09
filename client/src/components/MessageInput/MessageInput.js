@@ -13,6 +13,9 @@ const MessageInput = ({isDrawing}) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     let guess = reversed ? reversify(message) : message
+    if (guess == ''){
+      return
+    }
     socket.emit('guess', {guess:guess})
     setMessage('')
   }

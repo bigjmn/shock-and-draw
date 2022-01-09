@@ -21,7 +21,7 @@ module.exports = function(io, socket){
       })
       return
     }
-    team.word = null;
+    team.word = '';
     io.to(team.room).emit('response', {
       guess: data.guess,
       censored: false,
@@ -50,6 +50,10 @@ module.exports = function(io, socket){
   })
 
   socket.on('passWord', () => {
+    if (socket.user.team.word == ''){
+      return
+    }
+
     //eww
     io.to(socket.user.team.room).emit('response', {
       guess: socket.user.team.word,
@@ -58,8 +62,15 @@ module.exports = function(io, socket){
       correct: false,
       censored: false
     })
+    socket.user.team.word = ''
+    io.to(socket.user.team.room).emit('passmessage')
+    io.to(socket.user.team.room).emit('passnoise')
+
+
+  })
+  socket.on('hitme', () => {
     io.to(socket.user.team.opponent.drawer.id).emit('attackBounce')
-    nextWord(io, socket)
+
   })
 
 }
