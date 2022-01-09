@@ -107,7 +107,7 @@
   /* border: 1px dashed; */
   float: left;
   margin-left: 10px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 
 }
 .playerTagContainer{

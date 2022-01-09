@@ -21,6 +21,7 @@ module.exports = function(io, socket){
       })
       return
     }
+    team.word = null;
     io.to(team.room).emit('response', {
       guess: data.guess,
       censored: false,

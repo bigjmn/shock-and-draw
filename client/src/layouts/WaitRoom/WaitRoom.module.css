@@ -4,14 +4,14 @@
 .optionsContainer{
   display: flex;
   flex-direction: column;
-  height: 600px;
+  height: 400px;
   justify-content: space-around;
 }
 .teamList{
   width: 300px;
-  height: 700px;
+  height: 500px;
 }
 .hostZoneContainer{
   width: 100px;
-  height: 700px;
+  height: 500px;
 }

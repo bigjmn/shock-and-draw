@@ -39,6 +39,7 @@ useEffect(() => {
           <Message key={i} message={message}/>
 
       ))}
+
       <div ref={messagesEndRef} />
     </div>
   )
