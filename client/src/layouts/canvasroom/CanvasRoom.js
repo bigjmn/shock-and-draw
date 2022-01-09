@@ -4,13 +4,13 @@ import Canvas from '../../components/Canvas/Canvas.js'
 import RecCanvas from '../../components/RecCanvas/RecCanvas.js'
 
 
-const CanvasRoom = ({isDrawing}) => {
+const CanvasRoom = ({isDrawing, word}) => {
 
 
 
   return (
     <div className='bigboy'>
-      {isDrawing ? <Canvas /> : <RecCanvas />}
+      {isDrawing ? <Canvas word={word}/> : <RecCanvas word={word}/>}
     </div>
   )
 

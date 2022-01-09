@@ -3,7 +3,7 @@ import PeepCanvas from "../PeepCanvas/PeepCanvas";
 import socket from '../../context/socket.js'
 import classes from './RecCanvas.module.css'
 
-const RecCanvas = () => {
+const RecCanvas = ({word}) => {
   const canvasRef = React.useRef(null);
   const parentRef = React.useRef(null);
   const [ctx, setCtx] = useState({});
@@ -31,6 +31,19 @@ const RecCanvas = () => {
     ctx.fill()
     ctx.closePath()
   }
+  const correctSign = () => {
+    ctx.fillStyle = 'black'
+    ctx.fillRect(90, 90, 320, 220)
+    ctx.fillStyle = 'white'
+    ctx.fillRect(100,100,300,200)
+    ctx.fillStyle = 'black'
+    ctx.font = 'bold 42px serif'
+    ctx.textAlign = 'center'
+    ctx.fillText('correct!', 250, 140)
+    ctx.fillStyle = 'green'
+    ctx.font = 'bold 42px serif'
+    ctx.fillText(word+' ✔', 250, 260)
+  }
   useEffect(() => {
     socket.on('takePacket', (data) => {
 
@@ -48,12 +61,16 @@ const RecCanvas = () => {
     socket.on('peepingtomclear', () => {
       setPeepingtom(false)
     })
+    socket.on('correct', () => {
+      correctSign()
+    })
     return () => {
       socket.off('takePacket')
       socket.off('takeDot')
       socket.off('takeClear')
       socket.off('peepingtom')
       socket.off('peepingtomclear')
+      socket.off('correct')
     }
   })
 
@@ -72,6 +89,8 @@ const RecCanvas = () => {
     let offset = canv.getBoundingClientRect();
     setCanvasOffset({ x: parseInt(offset.left), y: parseInt(offset.top) });
   }, [ctx]);
+
+
 
 
 

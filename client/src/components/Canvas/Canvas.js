@@ -4,7 +4,7 @@ import socket from '../../context/socket.js'
 
 import classes from './Canvas.module.css'
 
-function Canvas() {
+const Canvas = ({word}) => {
   const canvasRef = React.useRef(null);
   const parentRef = React.useRef(null);
   const [ctx, setCtx] = useState({});
@@ -16,6 +16,7 @@ function Canvas() {
   const [activeTake, setActiveTake] = useState(false)
 
   const [cursorstyle, setCursorstyle] = useState("default")
+  const [frozen, setFrozen] = useState(false)
 
 
   // const [drawPack, setDrawPack] = useState([])
@@ -63,6 +64,24 @@ function Canvas() {
     setCanvasOffset({ x: parseInt(offset.left), y: parseInt(offset.top) });
   }, [ctx]);
 
+  const correctSign = () =>{
+    ctx.fillStyle = 'black'
+    ctx.fillRect(90, 90, 320, 220)
+    ctx.fillStyle = 'white'
+    ctx.fillRect(100,100,300,200)
+    ctx.fillStyle = 'black'
+    ctx.font = 'bold 42px serif'
+    ctx.textAlign = 'center'
+    ctx.fillText('correct!', 250, 140)
+    ctx.fillStyle = 'green'
+    ctx.font = 'bold 42px serif'
+    ctx.fillText(word+' ✔', 250, 260)
+    setTimeout(() => {
+      setFrozen(false)
+      socket.emit('getNext')
+    }, 2000)
+  }
+
   useEffect(() => {
     socket.on('takeClear', () => {
       ctx.clearRect(0,0,500,500)
@@ -73,14 +92,26 @@ function Canvas() {
     socket.on('hidemouseclear', () => {
       setCursorstyle('default')
     })
+    socket.on('correct', () => {
+      setDrawing(false)
+      setFrozen(true)
+      correctSign()
+    })
+
     return () => {
       socket.off('takeClear')
       socket.off('hidemouse')
       socket.off('hidemouseclear')
+      socket.off('correct')
     }
   })
 
+
+
   function handleMouseDown(e) {
+    if (frozen){
+      return
+    }
     setDrawing(true);
     setPosition({
       x: parseInt(e.nativeEvent.offsetX),

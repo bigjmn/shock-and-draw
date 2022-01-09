@@ -31,12 +31,12 @@ const GameRoom = (props) => {
       setShowRight(false)
       setWord(data.word)
     })
-    socket.on('correct', () => {
+    socket.on('thatscorrect', () => {
       showWord()
     })
     return () => {
       socket.off('takeWord')
-      socket.off('correct')
+      socket.off('thatscorrect')
     }
   })
 
@@ -77,7 +77,7 @@ const GameRoom = (props) => {
           <MessageInput isDrawing={props.isDrawing}/>
         </div>
         <div className={classes.canvasContainer}>
-          <CanvasRoom isDrawing={props.isDrawing} />
+          <CanvasRoom isDrawing={props.isDrawing} word={word}/>
         </div>
         <div className={classes.attackZoneContainer}>
           <AttackZone maxTime={props.attackTime} />
