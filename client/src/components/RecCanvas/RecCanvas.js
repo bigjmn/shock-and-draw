@@ -155,13 +155,14 @@ const RecCanvas = ({word}) => {
         style={{border:"1px solid"}}
 
       />
+      <div className={classes.peepContainer}>
+        {peepingtom && <PeepCanvas />}
+      </div>
 
 
 
     </div>
-    <div className={classes.peepContainer}>
-      {peepingtom && <PeepCanvas />}
-    </div>
+
     {fading && <FadeControl fadeCanvas={fadeCanvas}/>}
 
     </div>
