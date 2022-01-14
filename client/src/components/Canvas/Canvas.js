@@ -237,7 +237,7 @@ const Canvas = ({word}) => {
         onMouseUp={handleMouseUp}
         onMouseMove={throttledhandleMouseMove}
         onMouseOut={handleMouseOut}
-        height="500" width="500"
+        height="500px" width="500px"
 
 
         style={{border:"1px solid", cursor: cursorstyle }}

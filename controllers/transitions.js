@@ -53,6 +53,11 @@ module.exports = function(io, socket){
     }
     io.emit('takeRecap')
   })
+  socket.on('getwordhistory', () => {
+    socket.emit('takehistory',
+    {redhistory:socket.lobby.teams[0].wordhistory,
+    bluehistory: socket.lobby.teams[1].wordhistory})
+  })
   socket.on('backtoWaitRoom', () => {
     socket.leave('redroom')
     socket.leave('blueroom')

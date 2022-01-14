@@ -10,6 +10,7 @@ class Team{
     this.points = 0
     this.drawer = null
     this.word = null
+    this.wordhistory = []
 
     this.attackbonus = true;
     this.room = name+'room'
@@ -49,6 +50,7 @@ class Team{
   }
   prepRound(round){
     this.hitwith = []
+    this.wordhistory = []
     this.refreshword()
     for (let i = 0; i < this.users.length; i++){
       this.users[i].correct = 0

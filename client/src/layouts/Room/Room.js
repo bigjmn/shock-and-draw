@@ -135,6 +135,7 @@ const Room = () => {
     bluePoints={bluePoints}
     redDrawer={redDrawer}
     blueDrawer={blueDrawer}
+
     round={round} />
 
 ) : (gamestage == 'endgame') ?

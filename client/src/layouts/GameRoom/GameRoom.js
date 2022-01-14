@@ -66,6 +66,7 @@ const GameRoom = (props) => {
             redPoints={props.redPoints}
             bluePoints={props.bluePoints}/>
         </div>
+        <Player />
 
       </div>
       <div className={classes.middleBar}>
@@ -83,7 +84,7 @@ const GameRoom = (props) => {
           <AttackZone maxTime={props.attackTime} />
         </div>
       </div>
-      <Player />
+
 
     </div>
   )

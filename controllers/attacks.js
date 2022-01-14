@@ -6,7 +6,10 @@ module.exports = function(io, socket){
     //memoize w timestamp
     let timeStamp = Date.now()
     socket.lobby.attackmemo[timeStamp] = [oppTeam.index, attackIndex]
-    //send everyone data for attack card
+    //send team zap sound effect
+    io.to(oppTeam.room).emit('zapnoise')
+    //send everyone data for attack card. could do zap noise for everyone
+    //but kind of like it this way. we'll see.
     io.emit('takeAttack', {timestamp:timeStamp, color:oppTeam.color, type: attackIndex})
     //send hit team the attack
     io.to(oppTeam.room).emit(attacknames[attackIndex])

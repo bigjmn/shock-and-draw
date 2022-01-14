@@ -22,6 +22,7 @@ module.exports = function(io, socket){
       return
     }
     team.word = '';
+    team.wordhistory.push({word:data.guess,success:true})
     io.to(team.room).emit('response', {
       guess: data.guess,
       censored: false,
@@ -62,6 +63,7 @@ module.exports = function(io, socket){
       correct: false,
       censored: false
     })
+    socket.user.team.wordhistory.push({word:socket.user.team.word,success:false})
     socket.user.team.word = ''
     io.to(socket.user.team.room).emit('passmessage')
     io.to(socket.user.team.room).emit('passnoise')
