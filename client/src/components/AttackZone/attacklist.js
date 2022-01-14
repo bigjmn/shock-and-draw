@@ -33,5 +33,11 @@ var peepcard = {
   flavor: 'Honestly this is pretty creepy, even for you...'
 
 }
-const attacklist = [fatcard, hidecard, nocolorcard, reversecard, classifiedcard, peepcard]
+
+var canfade = {
+  title : "Fadin' Frank",
+  explainer: "drawing slowly fades",
+  flavor: "Faders gonna fade"
+}
+const attacklist = [fatcard, hidecard, nocolorcard, reversecard, classifiedcard, peepcard, canfade]
 export default attacklist
