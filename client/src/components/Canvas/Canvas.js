@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Controls from "../Controls/Controls";
+import FadeControl from "../FadeControl/FadeControl.js"
 import socket from '../../context/socket.js'
+
 
 import classes from './Canvas.module.css'
 
@@ -17,6 +19,7 @@ const Canvas = ({word}) => {
 
   const [cursorstyle, setCursorstyle] = useState("default")
   const [frozen, setFrozen] = useState(false)
+  const [fading, setFading] = useState(false)
 
 
   // const [drawPack, setDrawPack] = useState([])
@@ -110,6 +113,12 @@ const Canvas = ({word}) => {
     socket.on('hidemouseclear', () => {
       setCursorstyle('default')
     })
+    socket.on('canfade', () => {
+      setFading(true)
+    })
+    socket.on('canfadeclear', () => {
+      setFading(false)
+    })
     socket.on('correct', () => {
       setDrawing(false)
       setFrozen(true)
@@ -163,6 +172,14 @@ const Canvas = ({word}) => {
   }
   function handleMouseOut() {
     setDrawing(false);
+  }
+
+  const fadeCanvas = () => {
+    if (frozen){
+      return
+    }
+    ctx.fillStyle = "rgb(255,255,255,0.03)"
+    ctx.fillRect(0,0,500,500)
   }
 
   const handleMouseMove = (e) => {
@@ -230,6 +247,8 @@ const Canvas = ({word}) => {
         <Controls handleColor={handleColor} handleSize={handleSize} activeTake={activeTake}/>
 
       </div>
+      {fading && <FadeControl fadeCanvas={fadeCanvas}/>}
+
 
     </div>
 

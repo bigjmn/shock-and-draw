@@ -1,4 +1,4 @@
-const attacknames = ['fathands', 'hidemouse', 'nocolor', 'reverse', 'classified', 'peepingtom']
+const attacknames = ['fathands', 'hidemouse', 'nocolor', 'reverse', 'classified', 'peepingtom', 'canfade']
 module.exports = function(io, socket){
   socket.on('giveAttack', () => {
     let oppTeam = socket.user.team.opponent

@@ -20,7 +20,7 @@ class Team{
   }
 
   get newattack(){
-    var possibleAttacks = Array.from(Array(6).keys()).filter(x=>(this.hitwith.includes(x)==false))
+    var possibleAttacks = Array.from(Array(7).keys()).filter(x=>(this.hitwith.includes(x)==false))
     var randAttack = possibleAttacks[Math.floor(Math.random()*possibleAttacks.length)]
     this.hitwith.push(randAttack)
     return randAttack
@@ -41,7 +41,7 @@ class Team{
    var arr = readFileLines('utils/wordlist.txt');
 
    var myword = arr[Math.floor(Math.random()*arr.length)];
-   //this shouldn't happen, but just in case 
+   //this shouldn't happen, but just in case
    if (myword == ''){
      myword = 'pineapple'
    }

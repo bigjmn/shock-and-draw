@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PeepCanvas from "../PeepCanvas/PeepCanvas";
+import FadeControl from '../FadeControl/FadeControl.js'
 import socket from '../../context/socket.js'
 import classes from './RecCanvas.module.css'
+
 
 const RecCanvas = ({word}) => {
   const canvasRef = React.useRef(null);
@@ -13,6 +15,8 @@ const RecCanvas = ({word}) => {
   const [color, setColor] = useState("#000000");
 
   const [peepingtom, setPeepingtom] = useState(false)
+  const [fading, setFading] = useState(false)
+  const [frozen, setFrozen] = useState(false)
 
 
 
@@ -31,6 +35,15 @@ const RecCanvas = ({word}) => {
     ctx.fill()
     ctx.closePath()
   }
+
+  const fadeCanvas = () => {
+    if (frozen){
+      return
+    }
+    ctx.fillStyle = "rgb(255,255,255,0.03)"
+    ctx.fillRect(0,0,500,500)
+  }
+
   const correctSign = () => {
     ctx.fillStyle = 'black'
     ctx.fillRect(90, 90, 320, 220)
@@ -67,6 +80,7 @@ const RecCanvas = ({word}) => {
     })
     socket.on('takeClear', () => {
       ctx.clearRect(0,0,500,500)
+      setFrozen(false)
     })
     socket.on('peepingtom', () => {
       setPeepingtom(true)
@@ -74,11 +88,19 @@ const RecCanvas = ({word}) => {
     socket.on('peepingtomclear', () => {
       setPeepingtom(false)
     })
+    socket.on('canfade', () => {
+      setFading(true)
+    })
+    socket.on('canfadeclear', () => {
+      setFading(false)
+    })
     socket.on('correct', () => {
       correctSign()
+      setFrozen(true)
     })
     socket.on('passmessage', () => {
       passSign()
+      setFrozen(true)
     })
     return () => {
       socket.off('takePacket')
@@ -86,6 +108,8 @@ const RecCanvas = ({word}) => {
       socket.off('takeClear')
       socket.off('peepingtom')
       socket.off('peepingtomclear')
+      socket.off('canfade')
+      socket.off('canfadeclear')
       socket.off('correct')
       socket.off('passmessage')
     }
@@ -138,6 +162,7 @@ const RecCanvas = ({word}) => {
     <div className={classes.peepContainer}>
       {peepingtom && <PeepCanvas />}
     </div>
+    {fading && <FadeControl fadeCanvas={fadeCanvas}/>}
 
     </div>
 

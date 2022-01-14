@@ -36,7 +36,7 @@ var peepcard = {
 
 var canfade = {
   title : "Fadin' Frank",
-  explainer: "drawing slowly fades",
+  explainer: "Drawing slowly fades",
   flavor: "Faders gonna fade"
 }
 const attacklist = [fatcard, hidecard, nocolorcard, reversecard, classifiedcard, peepcard, canfade]
