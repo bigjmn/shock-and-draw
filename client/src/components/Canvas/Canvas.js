@@ -82,7 +82,7 @@ const Canvas = ({word}) => {
     setTimeout(() => {
       setFrozen(false)
       socket.emit('getNext')
-    }, 2000)
+    }, 1500)
   }
 
   const passSign = () =>{
@@ -100,7 +100,7 @@ const Canvas = ({word}) => {
       setFrozen(false)
       socket.emit('getNext')
       socket.emit('hitme')
-    }, 2000)
+    }, 1500)
   }
 
   useEffect(() => {

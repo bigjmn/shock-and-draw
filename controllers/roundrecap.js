@@ -5,7 +5,7 @@ module.exports = function (io, socket){
     }
     let redhistory = socket.lobby.teams[0].wordhistory
     let bluehistory = socket.lobby.teams[1].wordhistory
-    for (let i=0; i<Math.max(redhistory.length,bluehistory.length);i++){
+    for (let i=0; i<=Math.max(redhistory.length,bluehistory.length);i++){
       setTimeout(() => {
         io.emit('rendersound')
         io.emit('takehistory', {oldred: (redhistory[i] ? redhistory[i] : null),

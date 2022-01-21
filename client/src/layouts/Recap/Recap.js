@@ -20,10 +20,22 @@ const Recap = (props) => {
 
   useEffect(() => {
     socket.on('takehistory', (data) => {
+      if (!data.oldred && !data.oldblue){
+        socket.emit('getPreview')
+      }
       setRedHistory(oldHistory => data.oldred ? [...oldHistory, data.oldred] : oldHistory)
       setBlueHistory(oldHistory => data.oldblue ? [...oldHistory, data.oldblue] : oldHistory)
+      if (data.oldred && data.oldred.success){
+        setShownRedPoints(p => p+1)
+      }
+      if (data.oldblue && data.oldblue.success){
+        setShownBluePoints(p => p+1)
+
+      } 
+
 
     })
+
     return ()=> {
       socket.off('takehistory')
     }
