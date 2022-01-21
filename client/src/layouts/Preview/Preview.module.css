@@ -5,12 +5,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 2px solid;
+
+
+
 
 }
+
 .matchupContainer{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
 
 }

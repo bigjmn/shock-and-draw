@@ -5,7 +5,7 @@ import Preview from '../Preview/Preview.js'
 import GameRoom from '../GameRoom/GameRoom.js'
 import Recap from '../Recap/Recap.js'
 import EndGame from '../EndGame/EndGame.js'
-const Room = () => {
+const Room = ({setOnmute, onmute}) => {
 
   const [players, setPlayers] = useState([])
   const [redDrawer, setRedDrawer] = useState('')
@@ -33,6 +33,8 @@ const Room = () => {
   const [payload, setPayload] = useState(null)
   const [teamTags, setTeamTags] = useState(null)
   const [oppTags, setOppTags] = useState(null)
+
+
 
   useEffect(() => {
     socket.on('previewLaunch', (data) => {
@@ -95,6 +97,8 @@ const Room = () => {
         setRedDrawer={setRedDrawer}
         username={username}
         setUsername={setUsername}
+        setOnmute={setOnmute}
+        onmute={onmute}
 
 
 
@@ -126,6 +130,8 @@ const Room = () => {
     oppColor={oppColor}
     firstword={firstword}
     round={round}
+    setOnmute={setOnmute}
+    onmute={onmute}
     numRounds={numRounds}/>
 ) : (gamestage == 'recap') ?
 (

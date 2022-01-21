@@ -17,6 +17,8 @@ const GameRoom = (props) => {
   const [word, setWord] = useState(props.firstword)
   const [showRight, setShowRight] = useState(false)
 
+  const toggleMute = () => props.setOnmute(m => !m)
+
   const showWord = () => {
     setShowRight(true)
     setTimeout(() => {socket.emit('getNext')}, 1000)
@@ -66,7 +68,11 @@ const GameRoom = (props) => {
             redPoints={props.redPoints}
             bluePoints={props.bluePoints}/>
         </div>
-        <Player />
+        <button onClick={toggleMute}>{props.onmute ? <i class="fas fa-volume-mute"></i>
+
+   : <i class="fas fa-volume-up"></i>
+
+  }</button>
 
       </div>
       <div className={classes.middleBar}>

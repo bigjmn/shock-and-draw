@@ -21,7 +21,8 @@ module.exports = function(io, socket){
     var previewPack = {
       round: socket.lobby.round,
       reddrawer: socket.lobby.teams[0].drawer.username,
-      bluedrawer: socket.lobby.teams[1].drawer.username
+      bluedrawer: socket.lobby.teams[1].drawer.username,
+      funfact: require('../utils/funfacts.js')()
     }
     console.log('sending preview')
     io.emit('previewLaunch', {payload:previewPack})
@@ -53,11 +54,11 @@ module.exports = function(io, socket){
     }
     io.emit('takeRecap')
   })
-  socket.on('getwordhistory', () => {
-    socket.emit('takehistory',
-    {redhistory:socket.lobby.teams[0].wordhistory,
-    bluehistory: socket.lobby.teams[1].wordhistory})
-  })
+  // socket.on('getwordhistory', () => {
+  //   socket.emit('takehistory',
+  //   {redhistory:socket.lobby.teams[0].wordhistory,
+  //   bluehistory: socket.lobby.teams[1].wordhistory})
+  // })
   socket.on('backtoWaitRoom', () => {
     socket.leave('redroom')
     socket.leave('blueroom')

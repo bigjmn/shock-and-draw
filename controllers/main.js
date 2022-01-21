@@ -6,6 +6,7 @@ module.exports = function(io, socket){
   require('./message.js')(io, socket)
   require('./clocks.js')(io, socket)
   require('./attacks.js')(io, socket)
+  require('./roundrecap.js')(io, socket)
 
 
   socket.on('disconnect', () => {
@@ -33,7 +34,7 @@ module.exports = function(io, socket){
 
       team.removeUser(socket.user.id)
       console.log(team.users)
-      
+
     }
 
 
