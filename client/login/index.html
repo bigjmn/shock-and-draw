@@ -10,9 +10,14 @@
   <body>
     <div class="homepageWrapper">
       <h1>SHOCK AND DRAW</h1>
+      <div>
+        <video id='snapvid' src='./shockdrawsnapshot.mov' autoplay muted loop />
+      </div>
+
 
 
     <div class="optionContainer">
+
       <form class="" action="/create" method="post">
         <input type="submit" name="" value="Create Room" class="centerbutton" >
 
@@ -24,14 +29,14 @@
 
         <label for="codeinput">enter code below</label>
         <input id='codeinput' type="text" name="roomcode" value="">
-        <input type="submit" name="" value="Submit">
+        <!-- <input type="submit" value="Submit"> -->
         </form>
 
       </div>
 
 
-      <button type='button' id='toggleSlide' class='centerbutton'>RULES</button>
-      <button type="button" id="previewAttacks" class='centerbutton'>PREVIEW ATTACKS</button>
+      <!-- <button type='button' id='toggleSlide' class='centerbutton'>RULES</button>
+      <button type="button" id="previewAttacks" class='centerbutton'>PREVIEW ATTACKS</button> -->
 
     </div>
     <div id='slideandback'>

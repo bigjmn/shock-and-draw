@@ -107,10 +107,10 @@ function PeepCanvas() {
         onMouseUp={handleMouseUp}
         onMouseOut={handleMouseOut}
         onMouseMove={handleMouseMove}
-        height="500" width="500"
 
 
-        style={{border:"1px solid" }}
+
+        style={{border:"1px solid", height:'500px', width:'500px' }}
 
       />
 

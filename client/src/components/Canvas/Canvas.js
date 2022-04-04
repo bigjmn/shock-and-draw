@@ -237,10 +237,10 @@ const Canvas = ({word}) => {
         onMouseUp={handleMouseUp}
         onMouseMove={throttledhandleMouseMove}
         onMouseOut={handleMouseOut}
-        height="500px" width="500px"
 
 
-        style={{border:"1px solid", cursor: cursorstyle }}
+
+        style={{border:"1px solid", height:'500px', width:'500px', cursor: cursorstyle }}
 
       />
       <div className={classes.controlContainer}>

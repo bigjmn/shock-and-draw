@@ -1,5 +1,7 @@
 import socket from '../../context/socket.js'
+
 import classes from './JoinTeam.module.css'
+import { motion } from 'framer-motion'
 const JoinTeam = ({color, username}) => {
 
   const teamname = color == 'red' ? 'RED TEAM' : 'BLUE TEAM'
@@ -14,9 +16,9 @@ const JoinTeam = ({color, username}) => {
   }
 
   return(
-    <div>
-      <button className={classes.buttonStyle} onClick={handleClick}>Join {teamname}</button>
-    </div>
+    <motion.div>
+      <motion.button whileHover={{scale: 1.1}} className={classes.buttonStyle} onClick={handleClick}>Join {teamname}</motion.button>
+    </motion.div>
   )
 }
 

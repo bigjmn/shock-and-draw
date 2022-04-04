@@ -149,10 +149,10 @@ const RecCanvas = ({word}) => {
         ref={canvasRef}
 
 
-        height="500" width="500"
 
 
-        style={{border:"1px solid"}}
+
+        style={{border:"1px solid", height:'500px', width:'500px'}}
 
       />
       <div className={classes.peepContainer}>
