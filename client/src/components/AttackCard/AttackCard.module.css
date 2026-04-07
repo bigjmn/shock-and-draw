@@ -1,19 +1,28 @@
 .cardContainer {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 12px 14px;
+  padding: 10px 14px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
   position: relative;
   animation: slideIn 0.25s ease both;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .cardHeader {
   display: flex;
   flex-direction: row;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
   gap: 8px;
+}
+
+.cardIcon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.85;
 }
 
 .cardTitle {
@@ -23,6 +32,7 @@
   color: #e6edf3;
   margin: 0;
   line-height: 1;
+  flex: 1;
 }
 
 .cardTimer {
@@ -30,6 +40,25 @@
   font-size: 22px;
   line-height: 1;
   flex-shrink: 0;
+}
+
+/* Grid trick: animates to/from 0fr smoothly without fixed max-height */
+.cardBody {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.cardBodyCollapsed {
+  grid-template-rows: 0fr;
+}
+
+.cardBodyInner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 6px;
 }
 
 .cardExplainer {
