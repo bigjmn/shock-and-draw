@@ -1,8 +1,33 @@
-.guessInput{
-  width: 240px;
-  height: 40px;
-
+.guessform {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 10px;
+  flex-shrink: 0;
 }
-.guessform{
 
+.guessInput {
+  width: 100%;
+  height: 38px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 5px;
+  padding: 0 12px;
+  color: #e6edf3;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.guessInput::placeholder {
+  color: #7d8590;
+}
+
+.guessInput:focus {
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+}
+
+.guessInput:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }

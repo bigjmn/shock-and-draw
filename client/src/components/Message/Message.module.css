@@ -1,21 +1,55 @@
-.nameStyle{
+.messageHolder {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.nameStyle {
   font-weight: 600;
+  color: #e6edf3;
+}
 
-}
-.wordStyle{
-  color: green;
-  font-weight: 300;
-}
-.redactStyle{
+.wordStyle {
+  color: #3fb950;
   font-weight: 600;
-  font-style: italic;
-
 }
-.messageHolder{
-  margin-bottom: 5px;
-  clear: both;
-}
-.messageHolder p{
-  float: left;
 
+.passStyle {
+  color: #ff3b2d;
+  font-weight: 600;
+}
+
+.redactStyle {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: #7d8590;
+  color: #7d8590;
+  border-radius: 2px;
+  padding: 0 3px;
+  font-style: normal;
+}
+
+.messageText {
+  color: #7d8590;
+  margin: 0;
+}
+
+.correctRow {
+  background: rgba(63,185,80,0.08);
+  border-left: 2px solid #3fb950;
+  padding: 4px 6px;
+  border-radius: 0 4px 4px 0;
+}
+
+.passRow {
+  background: rgba(255,59,45,0.08);
+  border-left: 2px solid #ff3b2d;
+  padding: 4px 6px;
+  border-radius: 0 4px 4px 0;
+}
+
+.normalRow {
+  padding: 2px 0;
 }

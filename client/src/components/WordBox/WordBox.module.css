@@ -1,16 +1,36 @@
-.outerContainer{
-  height: 60px;
-  width: 400px;
-
-
+.outerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.outerContainer h1{
-  font-size: 20px;
-  font-weight: 300
 
-}
-.outerContainer h2{
+.wordDrawing {
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 30px;
-  font-weight: 600;
-  letter-spacing: 7px;
+  letter-spacing: 0.08em;
+  color: #e6edf3;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.wordHidden {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.35em;
+  color: #7d8590;
+  margin: 0;
+}
+
+.wordCorrect {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  color: #3fb950;
+  margin: 0;
+  animation: pop 0.2s ease both;
+}
+
+@keyframes pop {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
 }

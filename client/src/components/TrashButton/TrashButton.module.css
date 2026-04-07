@@ -1,0 +1,20 @@
+.trashBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,59,45,0.3);
+  background: rgba(255,59,45,0.08);
+  color: #ff3b2d;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.trashBtn:hover {
+  background: rgba(255,59,45,0.2);
+  border-color: #ff3b2d;
+}

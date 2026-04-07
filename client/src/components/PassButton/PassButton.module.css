@@ -1,4 +1,28 @@
-.passContainer button{
-  height: 60px;
-  width: 80px;
+.passContainer {
+  display: flex;
+  align-items: center;
+}
+
+.passBtn {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.12em;
+  padding: 6px 16px;
+  height: 36px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,59,45,0.5);
+  background: rgba(255,59,45,0.12);
+  color: #ff3b2d;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.passBtn:hover:not(:disabled) {
+  background: rgba(255,59,45,0.22);
+  border-color: #ff3b2d;
+}
+
+.passBtn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
 }

@@ -3,12 +3,11 @@ import socket from '../../context/socket.js'
 
 import Timer from '../Timer/Timer.js'
 import classes from './RoundClock.module.css'
+
 const RoundClock = ({maxTime}) => {
 
   const [startTime, setStartTime] = useState(0)
-
   const [secs, setSecs] = useState(0)
-
 
   const secSetter = (time) => {
     setSecs(time)
@@ -28,10 +27,12 @@ const RoundClock = ({maxTime}) => {
   })
 
   return(
-    <div>
-      <h1>{secs}</h1>
+    <div className={classes.clockWrapper}>
+      <span className={classes.clockLabel}>TIME</span>
+      <span className={`${classes.clockNum} ${secs > 0 && secs <= 15 ? classes.urgent : ''}`}>
+        {secs}
+      </span>
       <Timer secSetter={secSetter} maxTime={maxTime} startTime={startTime}/>
-
     </div>
   )
 }

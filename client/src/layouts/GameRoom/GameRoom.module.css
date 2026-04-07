@@ -1,124 +1,155 @@
-*{
-  box-sizing: border-box;
-}
-.gameContainer{
+.gameContainer {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1c2128;
+  --border: rgba(255,255,255,0.08);
+  --teal: #27b6d8;
+  --red: #ff3b2d;
+  --blue: #2df1ff;
+  --gold: #ffd700;
+  --text: #e6edf3;
+  --muted: #7d8590;
+
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-
-  padding: 5px;
-  border: 1px solid;
-
+  height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
 }
 
-.topBar{
-  margin-bottom: 5px;
+/* ── HUD bar ── */
+.hud {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-
-
-
-
-
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  height: 68px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
-.middleBar{
-  /* display: flex;
-  flex-direction: row; */
-  /* white-space: nowrap; */
+
+.hudDivider {
+  width: 1px;
+  height: 36px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.roundBadge {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: flex-start;
-
-
-
-
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
-
-.roundclockContainer{
-  /* border: 1px dashed; */
-  height: 60px;
-  width: 80px;
-  margin-left: 10px;
-  float: left;
-
-}
-.bonusclockContainer{
-  /* border: 1px dashed; */
-  height: 60px;
-  width: 120px;
-  margin-left: 10px;
-  float: left;
-
-}
-.wordboxContainer{
-  /* border: 1px dashed; */
-
-  height: 60px;
-  width: 400px;
-  margin-left: 10px;
-  float: left;
-  font-size: 32px;
-
-}
-.passbuttonContainer{
-  /* border: 1px dashed; */
-
-  height: 60px;
-  width: 80px;
-  margin-left: 10px;
-  float: left;
-
-}
-.scorecardContainer{
-  /* border: 1px dashed; */
-
-  height: 60px;
-  width: 120px;
-  margin-left: 10px;
-  float: left;
-
+.roundLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
 }
 
-.messageContainer{
-  width: 240px;
-  height: 500px;
-  /* border: 1px dashed; */
-  float: left;
-  margin-left: 10px;
-
-
-}
-.canvasContainer{
-  width: 500px;
-  height: 600px;
-  /* border: 1px dashed; */
-  float: left;
-  margin-left: 10px;
-
+.roundNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--text);
+  letter-spacing: 0.05em;
 }
 
-.attackZoneContainer{
-  width: 300px;
-  height: 500px;
-  /* border: 1px dashed; */
-  float: left;
-  margin-left: 10px;
-  /* overflow-y: auto; */
+.roundTotal {
+  font-size: 18px;
+  color: var(--muted);
+}
 
+.roundclockContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
-.playerTagContainer{
-  width: 120px;
-  height: 500px;
-  /* border: 1px dashed; */
-  float: left;
-}
-.roundContainer{
+
+.bonusclockContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
   width: 140px;
-  height: 60px;
-  /* border: 1px dashed; */
-  float: left;
+}
+
+.wordboxContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.passbuttonContainer {
+  flex-shrink: 0;
+}
+
+.scorecardContainer {
+  flex-shrink: 0;
+}
+
+.muteButton {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+  padding: 0;
+}
+
+.muteButton:hover {
+  background: var(--border);
+}
+
+/* ── Play area ── */
+.playArea {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.chatPanel {
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.canvasPanel {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 16px;
+  background: var(--bg);
+  overflow-y: auto;
+}
+
+.sidePanel {
+  width: 280px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border);
+  background: var(--surface);
+  overflow-y: auto;
 }

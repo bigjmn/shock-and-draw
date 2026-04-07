@@ -1,86 +1,60 @@
-.container {
-  display: block;
-  position: relative;
-
-
-  margin-left: 5px;
-  height:40px;
-  width:40px;
-  cursor: pointer;
-  border: 1px solid;
-  font-size: 22px;
-
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-
+.colorHolder {
+  display: flex;
+  align-items: center;
 }
 
-/* Hide the browser's default checkbox */
+.sizeForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 5px;
+  background: rgba(255,255,255,0.04);
+  transition: background 0.1s, border-color 0.1s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.container:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.25);
+}
+
 .container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
   height: 0;
   width: 0;
-
 }
 
-/* Create a custom checkbox */
 .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 40px;
-  width: 40px;
-  background-color: #999999;
   border-radius: 50%;
-  border: 2px solid;
-  border-color: #ffffff
+  background: #7d8590;
+  pointer-events: none;
+  transition: background 0.1s;
 }
 
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-  background-color: #444444;
-}
-
-/* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  background-color: #000000;
+  background: #e6edf3;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
+.container input:checked {
+  /* highlights the container when selected */
 }
 
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-  display: block;
-}
-
-
-/* Style the checkmark/indicator */
-/* .container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-} */
-.colorShower{
-  width: 200px;
-  height: 200px;
-
-}
-.sizeForm{
-  display: flex;
+.container:has(input:checked) {
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.1);
 }

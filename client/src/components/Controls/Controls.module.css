@@ -1,16 +1,21 @@
-.controlWrapper{
-  width: 600px;
-
-
-}
-.colorWrapper{
-
-  height: 50px;
-  float: left;
-}
-.sizetrashWrapper{
-
-  height: 50px;
+.controlWrapper {
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  width: 500px;
+}
+
+.colorWrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.sizetrashWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
 }

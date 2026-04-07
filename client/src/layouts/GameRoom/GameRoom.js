@@ -11,7 +11,7 @@ import AttackZone from '../../components/AttackZone/AttackZone.js'
 import PassButton from '../../components/PassButton/PassButton.js'
 import ScoreCard from '../../components/ScoreCard/ScoreCard.js'
 import PlayerTags from '../../components/PlayerTags/PlayerTags.js'
-import Player from '../../components/AudioPlayer/AudioPlayer.js'
+
 const GameRoom = (props) => {
 
   const [word, setWord] = useState(props.firstword)
@@ -42,25 +42,40 @@ const GameRoom = (props) => {
     }
   })
 
-
   return(
     <div className={classes.gameContainer}>
-      <div className={classes.topBar}>
-        <div className={classes.roundContainer}>
-          <h2>Round {props.round} / {props.numRounds}</h2>
+
+      {/* ── HUD bar ── */}
+      <div className={classes.hud}>
+        <div className={classes.roundBadge}>
+          <span className={classes.roundLabel}>ROUND</span>
+          <span className={classes.roundNum}>{props.round}<span className={classes.roundTotal}>/{props.numRounds}</span></span>
         </div>
+
+        <div className={classes.hudDivider}/>
+
         <div className={classes.roundclockContainer}>
           <RoundClock maxTime={props.roundTime}/>
         </div>
-        <div className={classes.bonusclockContainer}>
-          <BonusClock maxTime={props.bonusTime}/>
-        </div>
+
+        <div className={classes.hudDivider}/>
+
         <div className={classes.wordboxContainer}>
           <WordBox word={word} isDrawing={props.isDrawing} showRight={showRight}/>
         </div>
+
+        <div className={classes.hudDivider}/>
+
+        <div className={classes.bonusclockContainer}>
+          <BonusClock maxTime={props.bonusTime}/>
+        </div>
+
         <div className={classes.passbuttonContainer}>
           <PassButton isDrawing={props.isDrawing}/>
         </div>
+
+        <div className={classes.hudDivider}/>
+
         <div className={classes.scorecardContainer}>
           <ScoreCard
             setRedPoints={props.setRedPoints}
@@ -68,30 +83,34 @@ const GameRoom = (props) => {
             redPoints={props.redPoints}
             bluePoints={props.bluePoints}/>
         </div>
-        <button onClick={toggleMute}>{props.onmute ? <i class="fas fa-volume-mute"></i>
 
-   : <i class="fas fa-volume-up"></i>
-
-  }</button>
-
+        <button className={classes.muteButton} onClick={toggleMute} aria-label="Toggle mute">
+          {props.onmute ? '🔇' : '🔊'}
+        </button>
       </div>
-      <div className={classes.middleBar}>
-        <div className={classes.playerTagContainer}>
-          <PlayerTags teamTags={props.teamTags} oppTags={props.oppTags} teamColor={props.teamColor} oppColor={props.oppColor}/>
-        </div>
-        <div className={classes.messageContainer}>
+
+      {/* ── Play area ── */}
+      <div className={classes.playArea}>
+
+        <div className={classes.chatPanel}>
           <MessageHolder />
           <MessageInput isDrawing={props.isDrawing}/>
         </div>
-        <div className={classes.canvasContainer}>
+
+        <div className={classes.canvasPanel}>
           <CanvasRoom isDrawing={props.isDrawing} word={word}/>
         </div>
-        <div className={classes.attackZoneContainer}>
+
+        <div className={classes.sidePanel}>
+          <PlayerTags
+            teamTags={props.teamTags}
+            oppTags={props.oppTags}
+            teamColor={props.teamColor}
+            oppColor={props.oppColor}/>
           <AttackZone maxTime={props.attackTime} />
         </div>
+
       </div>
-
-
     </div>
   )
 }

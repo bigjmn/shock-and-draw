@@ -1,7 +1,17 @@
-.attackContainer{
-  width: 300px;
-  height: 500px;
-  border: 1px solid;
+.attackContainer {
+  flex: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
 
+.attackContainer::-webkit-scrollbar {
+  width: 4px;
+}
+.attackContainer::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
 }

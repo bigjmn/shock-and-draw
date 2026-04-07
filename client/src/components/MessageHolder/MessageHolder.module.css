@@ -1,11 +1,19 @@
-.messageWrapper{
-  width:240px;
-  height:460px;
-  padding:10px;
-
-
-
-  border: 1px dashed;
+.messageWrapper {
+  flex: 1;
+  min-height: 0;
+  padding: 12px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
 
+.messageWrapper::-webkit-scrollbar {
+  width: 4px;
+}
+.messageWrapper::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
 }

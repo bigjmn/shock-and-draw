@@ -1,14 +1,12 @@
 import socket from '../../context/socket.js'
+import classes from './TrashButton.module.css'
+
 const TrashButton = () => {
-
-  const handleClick = () => {
-    socket.emit('clearCanvas')
-  }
-
-  return(
-    <div>
-      <button style={{backgroundColor:"white", width:"40px", height:"40px"}} onClick={handleClick}>🗑</button>
-    </div>
+  const handleClick = () => { socket.emit('clearCanvas') }
+  return (
+    <button className={classes.trashBtn} onClick={handleClick} aria-label="Clear canvas" title="Clear canvas">
+      🗑
+    </button>
   )
 }
 

@@ -7,7 +7,9 @@ const PassButton = ({isDrawing}) => {
 
   return (
     <div className={classes.passContainer}>
-      <button disabled={!isDrawing} onClick={handleClick}>PASS</button>
+      <button className={classes.passBtn} disabled={!isDrawing} onClick={handleClick}>
+        PASS
+      </button>
     </div>
   )
 }

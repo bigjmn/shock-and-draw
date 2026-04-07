@@ -1,0 +1,26 @@
+.clockWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.clockLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #7d8590;
+}
+
+.clockNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.02em;
+  color: #e6edf3;
+  line-height: 1;
+  transition: color 0.3s;
+}
+
+.clockNum.urgent {
+  color: #ff3b2d;
+}

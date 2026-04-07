@@ -1,10 +1,19 @@
-.boardContainer{
+.boardContainer {
   position: relative;
-  /* z-index: 2; */
+  display: inline-block;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.5);
 }
-.peepContainer{
+
+.canvasEl {
+  display: block;
+  background: #fff;
+}
+
+.peepContainer {
   position: absolute;
-  top:0px;
-  left:0px;
+  top: 0;
+  left: 0;
   z-index: 3;
 }

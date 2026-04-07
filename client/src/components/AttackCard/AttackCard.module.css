@@ -1,47 +1,62 @@
-.cardContainer{
+.cardContainer {
   display: flex;
   flex-direction: column;
-
-
-
-  border: 1px dashed;
-  width: 300px;
-  padding-left: 15px;
-
-  padding-right: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  justify-content: center;
-  align-items: center;
-
-
+  gap: 2px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  animation: slideIn 0.25s ease both;
 }
-.cardContainer h1{
-  font-size: 26px;
-  font-weight: 800;
 
-  margin: 4px;
-
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
 }
-.cardContainer h2{
+
+.cardTitle {
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 18px;
-  font-weight: 600;
-
-  margin: 2px;
-
+  letter-spacing: 0.06em;
+  color: #e6edf3;
+  margin: 0;
+  line-height: 1;
 }
-.cardContainer h3{
-  font-size: 16px;
-  font-style: italic;
 
-  margin: 2px;
-
-
-}
-.timerspot{
-
-
-  margin: 2px;
+.cardTimer {
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
 
+.cardExplainer {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e6edf3;
+  margin: 0;
+  opacity: 0.85;
+}
+
+.cardFlavor {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  color: #7d8590;
+  margin: 0;
+}
+
+.timerBar {
+  height: 3px;
+  border-radius: 2px;
+  margin-top: 6px;
+  transition: width 0.9s linear;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }

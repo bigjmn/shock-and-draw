@@ -1,24 +1,26 @@
 import {hideword} from '../../helpers.js'
 import classes from './WordBox.module.css'
+
 const WordBox = ({word, isDrawing, showRight}) => {
   const hidden = hideword(word)
 
-  return showRight ? (
+  if (showRight) return (
     <div className={classes.outerContainer}>
-      <h1 style={{color:'green'}}>{word}</h1>
-    </div>
-  ) : isDrawing ? (
-    <div className={classes.outerContainer}>
-      <h1>{word}</h1>
-    </div>
-  ) : (
-    <div className={classes.outerContainer}>
-      <h2>{hidden}</h2>
+      <p className={classes.wordCorrect}>✔ {word}</p>
     </div>
   )
 
+  if (isDrawing) return (
+    <div className={classes.outerContainer}>
+      <p className={classes.wordDrawing}>{word}</p>
+    </div>
+  )
 
-
-
+  return (
+    <div className={classes.outerContainer}>
+      <p className={classes.wordHidden}>{hidden}</p>
+    </div>
+  )
 }
+
 export default WordBox
