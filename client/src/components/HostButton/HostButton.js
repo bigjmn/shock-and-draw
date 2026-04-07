@@ -1,12 +1,15 @@
 import socket from '../../context/socket.js'
+import classes from './HostButton.module.css'
+
 const HostButton = ({playerUndecided}) => {
 
-  const handleClick = () => {socket.emit('startgame')}
-
+  const handleClick = () => { socket.emit('startgame') }
 
   return(
-    <div className = 'hostbutton-container'>
-      <button disabled={playerUndecided} onClick={handleClick}>Start the game</button>
+    <div className={classes.container}>
+      <button className={classes.startButton} disabled={playerUndecided} onClick={handleClick}>
+        Start the Game
+      </button>
     </div>
   )
 }

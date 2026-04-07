@@ -2,85 +2,67 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <title></title>
+    <title>Shock & Draw</title>
   </head>
   <body>
     <div class="homepageWrapper">
-      <h1>SHOCK AND DRAW</h1>
-      <div>
-        <video id='snapvid' src='./shockdrawsnapshot.mov' autoplay muted loop />
+
+      <div class="titleCard">
+        <div class="titleText">
+          <span class="shock">SHOCK</span><span class="amp"> &amp; </span><span class="draw">DRAW</span>
+        </div>
+        <div class="titleBar"></div>
       </div>
 
-
-
-    <div class="optionContainer">
-
-      <form class="" action="/create" method="post">
-        <input type="submit" name="" value="Create Room" class="centerbutton" >
-
-      </form>
-      <button type='button' id='toggleCode' class='centerbutton'>enter room code</button>
-      <div id='inputCode' class="centerbutton">
-        <form class="" action="/join" method="post">
-
-
-        <label for="codeinput">enter code below</label>
-        <input id='codeinput' type="text" name="roomcode" value="">
-        <!-- <input type="submit" value="Submit"> -->
+      <div class="optionContainer">
+        <form action="/create" method="post">
+          <input type="submit" value="Create Room" class="centerbutton primary">
         </form>
-
+        <button type='button' id='toggleCode' class='centerbutton secondary'>Enter Room Code</button>
+        <div id='inputCode'>
+          <form action="/join" method="post">
+            <label for="codeinput">Room Code</label>
+            <input id='codeinput' type="text" name="roomcode" value="" placeholder="• • • • • •" autocomplete="off">
+          </form>
+        </div>
       </div>
-
-
-      <!-- <button type='button' id='toggleSlide' class='centerbutton'>RULES</button>
-      <button type="button" id="previewAttacks" class='centerbutton'>PREVIEW ATTACKS</button> -->
 
     </div>
+
     <div id='slideandback'>
       <div class='backbuttonwrapper'><button class='backtomain'>X</button></div>
-    <div id="slideshowContainer">
-      <div class='sidePanel'>
-        <button type="button" class="navbutton" id='leftbutton'></button>
+      <div id="slideshowContainer">
+        <div class='sidePanel'>
+          <button type="button" class="navbutton" id='leftbutton' aria-label="Previous slide">&#8592;</button>
+        </div>
+        <div id="mainPanel">
+          <div class="slide" id="slide0">
+            <p>Every round, each team has a designated drawer who tries to get the rest of the team to guess the team's given word.</p>
+            <p><strong>Both teams play at the same time</strong> but players only see the canvas, word, and chat window for their own team.</p>
+          </div>
+          <div class="slide" id='slide1'>
+            <p>When a word is guessed correctly, the team is given a point and assigned a new word. Each team tries to score as many points as possible before the round timer expires.</p>
+            <p>If a team guesses the word before the <strong>bonus timer</strong> expires, the opposing team is hit with an attack.</p>
+            A drawer can also <strong>pass</strong> on a word, but doing so causes his own team to take an attack.
+          </div>
+          <div class="slide" id='slide2'>
+            <p>Each attack has a unique effect that hinders the attacked team in some way. The attack lasts until the attack timer expires (or until the end of the round.)</p>
+          </div>
+          <div class="slide" id='slide3'>
+            <p>When all the rounds are complete, the team with the most points wins.</p>
+            <p>The total number of rounds is chosen before the start of the game.</p>
+          </div>
+        </div>
+        <div class='sidePanel'>
+          <button type="button" class="navbutton" id='rightbutton' aria-label="Next slide">&#8594;</button>
+        </div>
       </div>
-      <div id="mainPanel">
-        <div class="slide" id="slide0">
-          <p>Every round, each team has a designated drawer
-           who tries to get the rest of the team to guess the team's given word.</p>
-           <p><strong>Both teams play at the same time</strong> but player's only see the canvas, word, and chat window for their own team.</p>
-
-        </div>
-        <div class="slide" id='slide1'>
-          <p>When a word is guessed correctly, the team is given a point and assigned a new word. Each teams try to score as many points as possible before the round timer expires.</p>
-          <p>If a team guesses the word before the <strong>bonus timer</strong> expires, the opposing team is hit with an attack.</p>
-          A drawer can also <strong>pass</strong> on a word, but doing so causes his own team to take an attack.
-        </div>
-        <div class="slide" id='slide2'>
-          <p>Each attack has a unique effect that hinders the attacked team in some way. The attack lasts until the attack timer expires (or until the end of the round.) You can preview the different attacks on the homepage.</p>
-
-
-        </div>
-        <div class="slide" id='slide3'>
-          <p>When all the rounds are complete, the team with the most points wins.</p>
-          <p>The total number of rounds is chosen before the start of the game.
-          Durations of the round timer, bonus timer, and attack timer can be modified as well.</p>
-        </div>
-
-      </div>
-      <div class='sidePanel'>
-        <button type="button" class="navbutton" id='rightbutton'></button>
-      </div>
-
-    </div>
-    </div>
     </div>
 
-    <script src='./homepage.js'>
-
-    </script>
-
-
+    <script src='./homepage.js'></script>
   </body>
 </html>

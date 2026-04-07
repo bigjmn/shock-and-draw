@@ -1,17 +1,256 @@
-.teamListContainer{
-  display: flex;
-}
-.optionsContainer{
+/* ── Root vars (match login page palette) ── */
+.wrapper {
+  --teal: #27b6d8;
+  --teal-dark: #1a9bbf;
+  --teal-deep: #0f7a99;
+  --red: #ff3b2d;
+  --blue: #2df1ff;
+  --white: #f0faff;
+  --ink: #062030;
+
+  min-height: 100vh;
+  background-color: var(--teal);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
   display: flex;
   flex-direction: column;
-  height: 400px;
-  justify-content: space-around;
+  align-items: center;
+  gap: 32px;
+  padding: 40px 24px 32px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
 }
-.teamList{
-  width: 300px;
-  height: 500px;
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  animation: fadeDown 0.5s ease both;
 }
-.hostZoneContainer{
-  width: 100px;
-  height: 500px;
+
+.roomLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  opacity: 0.6;
+}
+
+.roomCode {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 10vw, 80px);
+  letter-spacing: 0.15em;
+  line-height: 1;
+  color: var(--white);
+  -webkit-text-stroke: 2px var(--ink);
+  paint-order: stroke fill;
+  text-shadow: 4px 4px 0 var(--ink);
+  margin: 0;
+}
+
+/* ── Teams grid ── */
+.teamsGrid {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  max-width: 900px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 6px 6px 0 var(--teal-deep);
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+
+.teamColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+  padding: 20px 16px;
+  gap: 16px;
+}
+
+.redColumn {
+  background: rgba(255, 59, 45, 0.18);
+  border-right: 2px solid var(--ink);
+}
+
+.blueColumn {
+  background: rgba(45, 241, 255, 0.18);
+  border-left: 2px solid var(--ink);
+}
+
+.midColumn {
+  flex: 1.1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px;
+  gap: 16px;
+  background: rgba(255,255,255,0.08);
+}
+
+.teamHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.teamName {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.1em;
+  margin: 0;
+  -webkit-text-stroke: 1px var(--ink);
+  paint-order: stroke fill;
+}
+
+.playerList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.playerTag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  padding: 6px 16px;
+  border-radius: 4px;
+  border: 2px solid var(--ink);
+  background: rgba(255,255,255,0.85);
+  color: var(--ink);
+  width: 100%;
+  text-align: center;
+}
+
+.redTag {
+  border-left: 4px solid var(--red);
+}
+
+.blueTag {
+  border-left: 4px solid var(--teal-deep);
+}
+
+.playerTagNeutral {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  padding: 6px 16px;
+  border-radius: 4px;
+  border: 2px dashed rgba(6,32,48,0.4);
+  color: var(--ink);
+  opacity: 0.7;
+  text-align: center;
+}
+
+/* ── Middle name section ── */
+.nameSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.nameLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.nameInputWrapper {
+  width: 100%;
+}
+
+.undecidedList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+/* ── Bottom settings + start bar ── */
+.bottomBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  animation: fadeUp 0.5s 0.2s ease both;
+}
+
+.settingsRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(6,32,48,0.2);
+  border-radius: 8px;
+  padding: 16px 20px;
+  width: 100%;
+}
+
+.settingLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+.settingSelect {
+  background: var(--ink);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  appearance: none;
+  text-align: center;
+  min-width: 72px;
+}
+
+/* ── Animations ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .teamsGrid {
+    flex-direction: column;
+  }
+  .redColumn {
+    border-right: none;
+    border-bottom: 2px solid var(--ink);
+  }
+  .blueColumn {
+    border-left: none;
+    border-top: 2px solid var(--ink);
+  }
+  .midColumn {
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
 }

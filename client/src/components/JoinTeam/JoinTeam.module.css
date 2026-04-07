@@ -1,4 +1,22 @@
-.buttonStyle{
+.buttonStyle {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.12em;
+  padding: 8px 18px;
+  border-radius: 5px;
+  border: 2px solid #062030;
+  background: #062030;
+  color: #f0faff;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  box-shadow: 3px 3px 0 rgba(6,32,48,0.3);
+}
 
-  font-size: 30px;
+.buttonStyle:hover {
+  box-shadow: 5px 5px 0 rgba(6,32,48,0.3);
+}
+
+.buttonStyle:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(6,32,48,0.3);
 }

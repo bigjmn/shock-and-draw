@@ -1,26 +1,21 @@
 import socket from '../../context/socket.js'
 import {useState} from 'react'
+import classes from './NameInput.module.css'
 
 const NameInput = ({setUsername, playernames}) => {
 
   const [tempName, setTempName] = useState('')
   const [errMess, setErrMess] = useState('')
 
-
-
   const testValid = (name) => {
-    if (name == ''){
-      return;
-    }
-    if (playernames.includes(name)){
+    if (name === '') return;
+    if (playernames.includes(name)) {
       setErrMess('That name is taken!')
       return;
     }
     setErrMess('')
     setUsername(name)
     socket.emit('newUsername', {username: name})
-
-
   }
 
   const handleSubmit = (e) => {
@@ -32,13 +27,20 @@ const NameInput = ({setUsername, playernames}) => {
   const handleChange = (e) => setTempName(e.target.value)
 
   return(
-    <div>
+    <div className={classes.wrapper}>
       <form onSubmit={handleSubmit}>
-        <input type='text' maxLength={12} onChange={handleChange} value={tempName}/>
+        <input
+          className={classes.input}
+          type='text'
+          maxLength={12}
+          onChange={handleChange}
+          value={tempName}
+          placeholder='your name'
+        />
       </form>
-      <p>{errMess}</p>
+      <p className={classes.error}>{errMess}</p>
     </div>
-
   )
 }
+
 export default NameInput
