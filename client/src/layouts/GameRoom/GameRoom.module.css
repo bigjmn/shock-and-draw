@@ -9,17 +9,18 @@
   --gold: #ffd700;
   --text: #e6edf3;
   --muted: #7d8590;
+  --tab-bar-height: 56px;
 
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   background: var(--bg);
   color: var(--text);
   font-family: 'DM Sans', sans-serif;
   overflow: hidden;
 }
 
-/* ── HUD bar ── */
+/* ── HUD ── */
 .hud {
   display: flex;
   flex-direction: row;
@@ -30,6 +31,13 @@
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
+}
+
+/* On desktop, both row groups are invisible wrappers (display:contents)
+   so their children are direct flex children of .hud */
+.hudRow1,
+.hudRow2 {
+  display: contents;
 }
 
 .hudDivider {
@@ -152,4 +160,145 @@
   border-left: 1px solid var(--border);
   background: var(--surface);
   overflow-y: auto;
+}
+
+/* ── Tab bar (hidden on desktop) ── */
+.tabBar {
+  display: none;
+}
+
+/* tabVisible / tabHidden are no-ops on desktop */
+.tabVisible {}
+.tabHidden {}
+
+/* ── Mobile layout (<1024px) ── */
+@media (max-width: 1023px) {
+  .gameContainer {
+    padding-bottom: calc(var(--tab-bar-height) + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* HUD: two stacked rows */
+  .hud {
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0;
+  }
+
+  .hudRow1,
+  .hudRow2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+  }
+
+  .hudRow1 {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Hide desktop dividers on mobile */
+  .hudRow1 .hudDivider,
+  .hudRow2 .hudDivider {
+    display: none;
+  }
+
+  .wordboxContainer {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .bonusclockContainer {
+    width: auto;
+    flex: 1;
+  }
+
+  .roundNum {
+    font-size: 22px;
+  }
+
+  /* Play area: single panel, full width */
+  .playArea {
+    position: relative;
+  }
+
+  .chatPanel,
+  .canvasPanel,
+  .sidePanel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .chatPanel {
+    border-right: none;
+  }
+
+  .sidePanel {
+    border-left: none;
+    width: 100%;
+  }
+
+  .canvasPanel {
+    padding: 12px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Panel visibility switching */
+  .tabHidden {
+    display: none !important;
+  }
+
+  .tabVisible {
+    display: flex !important;
+  }
+
+  /* ── Tab bar ── */
+  .tabBar {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--tab-bar-height);
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    z-index: 100;
+  }
+
+  .tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 6px 0;
+    border-top: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .tab:active {
+    background: var(--border);
+  }
+
+  .tabActive {
+    color: var(--text);
+    border-top-color: var(--teal);
+  }
 }

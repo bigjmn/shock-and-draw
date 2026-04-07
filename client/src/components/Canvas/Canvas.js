@@ -4,11 +4,10 @@ import FadeControl from "../FadeControl/FadeControl.js"
 import socket from '../../context/socket.js'
 import classes from './Canvas.module.css'
 
-const CANVAS_SIZE = 500;
-
 const Canvas = ({word}) => {
   const canvasRef = React.useRef(null);
   const parentRef = React.useRef(null);
+  const canvasSizeRef = React.useRef(500);
   const [ctx, setCtx] = useState({});
   const [drawing, setDrawing] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -31,8 +30,10 @@ const Canvas = ({word}) => {
 
   useEffect(() => {
     let canv = canvasRef.current;
-    canv.width = 500;
-    canv.height = 500;
+    const size = canv.clientWidth > 0 ? canv.clientWidth : 500;
+    canv.width = size;
+    canv.height = size;
+    canvasSizeRef.current = size;
     let canvCtx = canv.getContext("2d");
     canvCtx.lineJoin = "round";
     canvCtx.lineCap = "round";
@@ -77,7 +78,7 @@ const Canvas = ({word}) => {
   }
 
   useEffect(() => {
-    socket.on('takeClear', () => { ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE); strokeHistory.current = [] })
+    socket.on('takeClear', () => { ctx.clearRect(0, 0, canvasSizeRef.current, canvasSizeRef.current); strokeHistory.current = [] })
     socket.on('hidemouse', () => { setCursorstyle('none') })
     socket.on('hidemouseclear', () => { setCursorstyle('crosshair') })
     socket.on('canfade', () => { setFading(true) })
@@ -102,11 +103,12 @@ const Canvas = ({word}) => {
     ctx.arc(position.x, position.y, thickness / 2, 0, 2 * Math.PI)
     ctx.fill()
     ctx.closePath()
+    const size = canvasSizeRef.current
     const normalizedDot = {
-      centerx: position.x / CANVAS_SIZE,
-      centery: position.y / CANVAS_SIZE,
+      centerx: position.x / size,
+      centery: position.y / size,
       color,
-      thickness: thickness / CANVAS_SIZE
+      thickness: thickness / size
     }
     strokeHistory.current.push({ type: 'dot', ...normalizedDot })
     socket.emit('sendDot', { payload: normalizedDot })
@@ -118,7 +120,7 @@ const Canvas = ({word}) => {
   const fadeCanvas = () => {
     if (frozen) return
     ctx.fillStyle = "rgb(255,255,255,0.03)"
-    ctx.fillRect(0, 0, 500, 500)
+    ctx.fillRect(0, 0, canvasSizeRef.current, canvasSizeRef.current)
   }
 
   const handleMouseMove = (e) => {
@@ -131,13 +133,14 @@ const Canvas = ({word}) => {
       ctx.moveTo(position.x, position.y);
       ctx.lineTo(mousex, mousey);
       ctx.stroke();
+      const size = canvasSizeRef.current
       const normalizedPack = {
-        oldx: position.x / CANVAS_SIZE,
-        oldy: position.y / CANVAS_SIZE,
-        newx: mousex / CANVAS_SIZE,
-        newy: mousey / CANVAS_SIZE,
+        oldx: position.x / size,
+        oldy: position.y / size,
+        newx: mousex / size,
+        newy: mousey / size,
         color,
-        thickness: thickness / CANVAS_SIZE
+        thickness: thickness / size
       }
       strokeHistory.current.push({ type: 'line', ...normalizedPack })
       socket.emit('sendPack', { payload: normalizedPack })
@@ -146,6 +149,56 @@ const Canvas = ({word}) => {
   }
 
   const throttledhandleMouseMove = throttled(50, handleMouseMove)
+
+  const getTouchPos = (e) => {
+    const rect = canvasRef.current.getBoundingClientRect()
+    const touch = e.touches[0] || e.changedTouches[0]
+    return {
+      x: Math.round(touch.clientX - rect.left),
+      y: Math.round(touch.clientY - rect.top)
+    }
+  }
+
+  function handleTouchStart(e) {
+    if (frozen) return
+    const { x, y } = getTouchPos(e)
+    setDrawing(true)
+    setPosition({ x, y })
+    ctx.fillStyle = color
+    ctx.beginPath()
+    ctx.arc(x, y, thickness / 2, 0, 2 * Math.PI)
+    ctx.fill()
+    ctx.closePath()
+    const size = canvasSizeRef.current
+    const normalizedDot = { centerx: x / size, centery: y / size, color, thickness: thickness / size }
+    strokeHistory.current.push({ type: 'dot', ...normalizedDot })
+    socket.emit('sendDot', { payload: normalizedDot })
+  }
+
+  const handleTouchMove = (e) => {
+    const { x, y } = getTouchPos(e)
+    if (drawing) {
+      ctx.strokeStyle = color
+      ctx.lineWidth = thickness
+      ctx.beginPath()
+      ctx.moveTo(position.x, position.y)
+      ctx.lineTo(x, y)
+      ctx.stroke()
+      const size = canvasSizeRef.current
+      const normalizedPack = {
+        oldx: position.x / size, oldy: position.y / size,
+        newx: x / size, newy: y / size,
+        color, thickness: thickness / size
+      }
+      strokeHistory.current.push({ type: 'line', ...normalizedPack })
+      socket.emit('sendPack', { payload: normalizedPack })
+    }
+    setPosition({ x, y })
+  }
+
+  function handleTouchEnd() { setDrawing(false) }
+
+  const throttledHandleTouchMove = throttled(50, handleTouchMove)
 
   return (
     <div className={classes.boardContainer} ref={parentRef}>
@@ -156,7 +209,11 @@ const Canvas = ({word}) => {
         onMouseUp={handleMouseUp}
         onMouseMove={throttledhandleMouseMove}
         onMouseOut={handleMouseOut}
-        style={{ height: '500px', width: '500px', cursor: cursorstyle }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={throttledHandleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
+        style={{ cursor: cursorstyle }}
       />
       <div className={classes.controlContainer}>
         <Controls handleColor={(c) => setColor(c)} handleSize={(s) => setThickness(s)} />

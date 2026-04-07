@@ -4,11 +4,10 @@ import FadeControl from '../FadeControl/FadeControl.js'
 import socket from '../../context/socket.js'
 import classes from './RecCanvas.module.css'
 
-const CANVAS_SIZE = 500;
-
 const RecCanvas = ({word}) => {
   const canvasRef = React.useRef(null);
   const parentRef = React.useRef(null);
+  const canvasSizeRef = React.useRef(500);
   const [ctx, setCtx] = useState({});
   const [peepingtom, setPeepingtom] = useState(false)
   const [fading, setFading] = useState(false)
@@ -16,11 +15,12 @@ const RecCanvas = ({word}) => {
   const strokeHistory = React.useRef([])
 
   const handlePack = (payload) => {
-    const oldx = payload.oldx * CANVAS_SIZE
-    const oldy = payload.oldy * CANVAS_SIZE
-    const newx = payload.newx * CANVAS_SIZE
-    const newy = payload.newy * CANVAS_SIZE
-    const thickness = payload.thickness * CANVAS_SIZE
+    const size = canvasSizeRef.current
+    const oldx = payload.oldx * size
+    const oldy = payload.oldy * size
+    const newx = payload.newx * size
+    const newy = payload.newy * size
+    const thickness = payload.thickness * size
     ctx.strokeStyle = payload.color
     ctx.lineWidth = thickness
     ctx.beginPath()
@@ -31,9 +31,10 @@ const RecCanvas = ({word}) => {
   }
 
   const handleDot = (payload) => {
-    const centerx = payload.centerx * CANVAS_SIZE
-    const centery = payload.centery * CANVAS_SIZE
-    const thickness = payload.thickness * CANVAS_SIZE
+    const size = canvasSizeRef.current
+    const centerx = payload.centerx * size
+    const centery = payload.centery * size
+    const thickness = payload.thickness * size
     ctx.fillStyle = payload.color
     ctx.beginPath()
     ctx.arc(centerx, centery, thickness / 2, 0, 2 * Math.PI)
@@ -45,7 +46,7 @@ const RecCanvas = ({word}) => {
   const fadeCanvas = () => {
     if (frozen) return
     ctx.fillStyle = "rgb(255,255,255,0.03)"
-    ctx.fillRect(0, 0, 500, 500)
+    ctx.fillRect(0, 0, canvasSizeRef.current, canvasSizeRef.current)
   }
 
   const correctSign = () => {
@@ -79,7 +80,7 @@ const RecCanvas = ({word}) => {
   useEffect(() => {
     socket.on('takePacket', (data) => { handlePack(data.payload) })
     socket.on('takeDot', (data) => { handleDot(data.payload) })
-    socket.on('takeClear', () => { ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE); strokeHistory.current = []; setFrozen(false) })
+    socket.on('takeClear', () => { ctx.clearRect(0, 0, canvasSizeRef.current, canvasSizeRef.current); strokeHistory.current = []; setFrozen(false) })
     socket.on('peepingtom', () => { setPeepingtom(true) })
     socket.on('peepingtomclear', () => { setPeepingtom(false) })
     socket.on('canfade', () => { setFading(true) })
@@ -101,8 +102,10 @@ const RecCanvas = ({word}) => {
 
   useEffect(() => {
     let canv = canvasRef.current;
-    canv.width = parentRef.current.offsetWidth;
-    canv.height = parentRef.current.offsetHeight;
+    const size = canv.clientWidth > 0 ? canv.clientWidth : 500;
+    canv.width = size;
+    canv.height = size;
+    canvasSizeRef.current = size;
     let canvCtx = canv.getContext("2d");
     canvCtx.lineJoin = "round";
     canvCtx.lineCap = "round";
@@ -115,7 +118,6 @@ const RecCanvas = ({word}) => {
       <canvas
         className={classes.canvasEl}
         ref={canvasRef}
-        style={{ height: '500px', width: '500px' }}
       />
       <div className={classes.peepContainer}>
         {peepingtom && <PeepCanvas />}

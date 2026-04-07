@@ -1,20 +1,23 @@
 .boardContainer {
   position: relative;
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
-  gap: 0;
+  width: 100%;
+  max-width: 500px;
 }
 
 .canvasEl {
   display: block;
-  border: none;
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: 6px 6px 0 0;
   box-shadow: 0 0 0 2px rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.5);
   background: #fff;
+  touch-action: none;
 }
 
 .controlContainer {
-  width: 500px;
+  width: 100%;
   background: #161b22;
   border: 2px solid rgba(255,255,255,0.08);
   border-top: none;
