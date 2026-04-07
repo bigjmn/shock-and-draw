@@ -4,6 +4,8 @@ import FadeControl from "../FadeControl/FadeControl.js"
 import socket from '../../context/socket.js'
 import classes from './Canvas.module.css'
 
+const CANVAS_SIZE = 500;
+
 const Canvas = ({word}) => {
   const canvasRef = React.useRef(null);
   const parentRef = React.useRef(null);
@@ -15,6 +17,7 @@ const Canvas = ({word}) => {
   const [cursorstyle, setCursorstyle] = useState("crosshair")
   const [frozen, setFrozen] = useState(false)
   const [fading, setFading] = useState(false)
+  const strokeHistory = React.useRef([])
 
   function throttled(delay, fn) {
     let lastCall = 0;
@@ -28,8 +31,8 @@ const Canvas = ({word}) => {
 
   useEffect(() => {
     let canv = canvasRef.current;
-    canv.width = parentRef.current.offsetWidth;
-    canv.height = parentRef.current.offsetHeight;
+    canv.width = 500;
+    canv.height = 500;
     let canvCtx = canv.getContext("2d");
     canvCtx.lineJoin = "round";
     canvCtx.lineCap = "round";
@@ -74,7 +77,7 @@ const Canvas = ({word}) => {
   }
 
   useEffect(() => {
-    socket.on('takeClear', () => { ctx.clearRect(0, 0, 500, 500) })
+    socket.on('takeClear', () => { ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE); strokeHistory.current = [] })
     socket.on('hidemouse', () => { setCursorstyle('none') })
     socket.on('hidemouseclear', () => { setCursorstyle('crosshair') })
     socket.on('canfade', () => { setFading(true) })
@@ -99,7 +102,14 @@ const Canvas = ({word}) => {
     ctx.arc(position.x, position.y, thickness / 2, 0, 2 * Math.PI)
     ctx.fill()
     ctx.closePath()
-    socket.emit('sendDot', { payload: { centerx: position.x, centery: position.y, color, thickness } })
+    const normalizedDot = {
+      centerx: position.x / CANVAS_SIZE,
+      centery: position.y / CANVAS_SIZE,
+      color,
+      thickness: thickness / CANVAS_SIZE
+    }
+    strokeHistory.current.push({ type: 'dot', ...normalizedDot })
+    socket.emit('sendDot', { payload: normalizedDot })
   }
 
   function handleMouseUp() { setDrawing(false) }
@@ -121,7 +131,16 @@ const Canvas = ({word}) => {
       ctx.moveTo(position.x, position.y);
       ctx.lineTo(mousex, mousey);
       ctx.stroke();
-      socket.emit('sendPack', { payload: { oldx: position.x, oldy: position.y, newx: mousex, newy: mousey, color, thickness } })
+      const normalizedPack = {
+        oldx: position.x / CANVAS_SIZE,
+        oldy: position.y / CANVAS_SIZE,
+        newx: mousex / CANVAS_SIZE,
+        newy: mousey / CANVAS_SIZE,
+        color,
+        thickness: thickness / CANVAS_SIZE
+      }
+      strokeHistory.current.push({ type: 'line', ...normalizedPack })
+      socket.emit('sendPack', { payload: normalizedPack })
     }
     setPosition({ x: mousex, y: mousey });
   }

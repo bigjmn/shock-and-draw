@@ -4,6 +4,8 @@ import FadeControl from '../FadeControl/FadeControl.js'
 import socket from '../../context/socket.js'
 import classes from './RecCanvas.module.css'
 
+const CANVAS_SIZE = 500;
+
 const RecCanvas = ({word}) => {
   const canvasRef = React.useRef(null);
   const parentRef = React.useRef(null);
@@ -11,22 +13,33 @@ const RecCanvas = ({word}) => {
   const [peepingtom, setPeepingtom] = useState(false)
   const [fading, setFading] = useState(false)
   const [frozen, setFrozen] = useState(false)
+  const strokeHistory = React.useRef([])
 
   const handlePack = (payload) => {
+    const oldx = payload.oldx * CANVAS_SIZE
+    const oldy = payload.oldy * CANVAS_SIZE
+    const newx = payload.newx * CANVAS_SIZE
+    const newy = payload.newy * CANVAS_SIZE
+    const thickness = payload.thickness * CANVAS_SIZE
     ctx.strokeStyle = payload.color
-    ctx.lineWidth = payload.thickness
+    ctx.lineWidth = thickness
     ctx.beginPath()
-    ctx.moveTo(payload.oldx, payload.oldy)
-    ctx.lineTo(payload.newx, payload.newy)
+    ctx.moveTo(oldx, oldy)
+    ctx.lineTo(newx, newy)
     ctx.stroke()
+    strokeHistory.current.push({ type: 'line', ...payload })
   }
 
   const handleDot = (payload) => {
+    const centerx = payload.centerx * CANVAS_SIZE
+    const centery = payload.centery * CANVAS_SIZE
+    const thickness = payload.thickness * CANVAS_SIZE
     ctx.fillStyle = payload.color
     ctx.beginPath()
-    ctx.arc(payload.centerx, payload.centery, payload.thickness / 2, 0, 2 * Math.PI)
+    ctx.arc(centerx, centery, thickness / 2, 0, 2 * Math.PI)
     ctx.fill()
     ctx.closePath()
+    strokeHistory.current.push({ type: 'dot', ...payload })
   }
 
   const fadeCanvas = () => {
@@ -66,7 +79,7 @@ const RecCanvas = ({word}) => {
   useEffect(() => {
     socket.on('takePacket', (data) => { handlePack(data.payload) })
     socket.on('takeDot', (data) => { handleDot(data.payload) })
-    socket.on('takeClear', () => { ctx.clearRect(0, 0, 500, 500); setFrozen(false) })
+    socket.on('takeClear', () => { ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE); strokeHistory.current = []; setFrozen(false) })
     socket.on('peepingtom', () => { setPeepingtom(true) })
     socket.on('peepingtomclear', () => { setPeepingtom(false) })
     socket.on('canfade', () => { setFading(true) })
