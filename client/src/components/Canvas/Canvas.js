@@ -153,9 +153,10 @@ const Canvas = ({word}) => {
   const getTouchPos = (e) => {
     const rect = canvasRef.current.getBoundingClientRect()
     const touch = e.touches[0] || e.changedTouches[0]
+    const scale = canvasSizeRef.current / rect.width
     return {
-      x: Math.round(touch.clientX - rect.left),
-      y: Math.round(touch.clientY - rect.top)
+      x: Math.round((touch.clientX - rect.left) * scale),
+      y: Math.round((touch.clientY - rect.top) * scale)
     }
   }
 
