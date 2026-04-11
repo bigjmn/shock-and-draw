@@ -24,6 +24,7 @@ const Room = ({setOnmute, onmute}) => {
   const [totalRedPoints, setTotalRedPoints] = useState(0)
   const [totalBluePoints, setTotalBluePoints] = useState(0)
   const [numRounds, setNumRounds] = useState(4)
+  const [startTime, setStartTime] = useState(null)
 
   const [redPoints, setRedPoints] = useState(0)
   const [bluePoints, setBluePoints] = useState(0)
@@ -45,6 +46,7 @@ const Room = ({setOnmute, onmute}) => {
       setRound(data.payload.round)
       setRedDrawer(data.payload.reddrawer)
       setBlueDrawer(data.payload.bluedrawer)
+      setStartTime(data.payload.startTime)
       setGamestage('preview')
     })
     socket.on('takeRoundData', (data) => {
@@ -114,7 +116,7 @@ const Room = ({setOnmute, onmute}) => {
     </div>
   ) : (gamestage == 'preview') ?
   (
-    <Preview round={round} redDrawer={redDrawer} blueDrawer={blueDrawer}/>
+    <Preview round={round} redDrawer={redDrawer} blueDrawer={blueDrawer} startTime={startTime}/>
   ) : (gamestage == 'playing') ?
   (
     <GameRoom isDrawing={isDrawing} roundTime={roundTime}

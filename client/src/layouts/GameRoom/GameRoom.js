@@ -88,7 +88,7 @@ const GameRoom = (props) => {
       <div className={classes.playArea}>
 
         <div className={`${classes.chatPanel} ${activeTab === 'chat' ? classes.tabVisible : classes.tabHidden}`}>
-          <MessageHolder />
+          <MessageHolder teamColor={props.teamColor} />
           <MessageInput isDrawing={props.isDrawing}/>
         </div>
 

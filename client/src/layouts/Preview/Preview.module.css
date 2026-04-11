@@ -1,22 +1,131 @@
-.previewContainer{
-  /* width: 600px;
-  height: 600px; */
+/* ── Variables (mirror GameRoom) ── */
+.previewContainer {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: rgba(255,255,255,0.08);
+  --teal: #27b6d8;
+  --red: #ff3b2d;
+  --blue: #2df1ff;
+  --text: #e6edf3;
+  --muted: #7d8590;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid;
+  height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  gap: 8px;
 
-
-
-
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.matchupContainer{
+.fadeIn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* ── Round ── */
+.roundLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+}
+
+.roundNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 96px;
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+/* ── Divider ── */
+.divider {
+  width: 60px;
+  height: 1px;
+  background: var(--border);
+  margin: 12px 0;
+}
+
+/* ── Matchup ── */
+.matchupLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.matchup {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
+}
 
+.redName {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--red);
+  letter-spacing: 0.06em;
+}
 
+.blueName {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--blue);
+  letter-spacing: 0.06em;
+}
+
+.vs {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ── Countdown ── */
+.getReady {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.25em;
+  color: var(--teal);
+  margin-top: 4px;
+}
+
+.countdownNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: 0.05em;
+  animation: pulse 1s ease-in-out;
+}
+
+.urgent {
+  color: var(--red);
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1.35); opacity: 0.4; }
+  40%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .roundNum { font-size: 72px; }
+  .redName, .blueName { font-size: 28px; }
+  .countdownNum { font-size: 60px; }
 }

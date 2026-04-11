@@ -53,3 +53,24 @@
 .normalRow {
   padding: 2px 0;
 }
+
+.attackRow {
+  padding: 4px 6px;
+  border-radius: 0 4px 4px 0;
+  font-style: italic;
+}
+
+.attackRowHit {
+  background: rgba(255, 59, 45, 0.1);
+  border-left: 2px solid #ff3b2d;
+}
+
+.attackRowSent {
+  background: rgba(39, 182, 216, 0.1);
+  border-left: 2px solid #27b6d8;
+}
+
+.attackName {
+  font-weight: 700;
+  font-style: normal;
+}

@@ -1,25 +1,155 @@
-.pointsRecapContainer{
-  display: flex;
-}
-.totalpointsHolder{
-  width: 100px;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+/* ── Variables ── */
+.recapContainer {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1c2128;
+  --border: rgba(255,255,255,0.08);
+  --red: #ff3b2d;
+  --blue: #2df1ff;
+  --green: #3fb950;
+  --text: #e6edf3;
+  --muted: #7d8590;
 
-}
-.recapContainer{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100dvh;
+  padding: 40px 24px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  gap: 32px;
+  box-sizing: border-box;
+
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.wordcard .blankside {
-  transform: rotateY(90deg);
-  transition: all ease-in 0.15s;
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
 }
-.flipped .blankside {
-  transform: rotateY(0deg);
-  transition-delay: 0.15s;
+
+.fadeOut {
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* ── Heading ── */
+.heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+/* ── Columns ── */
+.columns {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 640px;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.columnDivider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border);
+  margin: 0 24px;
+}
+
+/* ── Score header ── */
+.drawerName {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+}
+
+.teamScore {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+/* ── Word cards ── */
+.wordList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.wordCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface);
+
+  opacity: 0;
+  transform: translateY(6px);
+  animation: cardReveal 0.35s ease forwards;
+}
+
+.success {
+  border-color: rgba(63, 185, 80, 0.3);
+  background: rgba(63, 185, 80, 0.08);
+}
+
+.fail {
+  border-color: rgba(125, 133, 144, 0.2);
+  color: var(--muted);
+}
+
+.wordText {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wordIcon {
+  flex-shrink: 0;
+  margin-left: 8px;
+  font-size: 13px;
+}
+
+.success .wordIcon {
+  color: var(--green);
+}
+
+.fail .wordIcon {
+  color: var(--muted);
+}
+
+@keyframes cardReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .teamScore { font-size: 48px; }
+  .columnDivider { margin: 0 16px; }
+  .wordCard { font-size: 13px; padding: 6px 10px; }
 }

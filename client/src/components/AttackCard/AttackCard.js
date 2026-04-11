@@ -35,7 +35,9 @@ const AttackCard = ({type, color, timestamp, maxTime, filterOut}) => {
       onClick={() => setIsExpanded(v => !v)}
     >
       <div className={classes.cardHeader}>
-        <img src={type.icon} className={classes.cardIcon} alt="" />
+        <div className={classes.cardIconCircle}>
+          <img src={type.icon} className={classes.cardIcon} alt="" />
+        </div>
         <h2 className={classes.cardTitle}>{type.title}</h2>
         <span className={classes.cardTimer} style={{color: accentColor}}>{secs}</span>
       </div>

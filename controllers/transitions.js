@@ -22,7 +22,8 @@ module.exports = function(io, socket){
       round: socket.lobby.round,
       reddrawer: socket.lobby.teams[0].drawer.username,
       bluedrawer: socket.lobby.teams[1].drawer.username,
-      funfact: require('../utils/funfacts.js')()
+      funfact: require('../utils/funfacts.js')(),
+      startTime: Date.now()
     }
     console.log('sending preview')
     io.emit('previewLaunch', {payload:previewPack})
