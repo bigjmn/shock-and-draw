@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import socket from '../../context/socket.js'
-import Waitroom from '../Waitroom/Waitroom.js'
+import Waitroom from '../WaitRoom/WaitRoom.js'
 import Preview from '../Preview/Preview.js'
 import GameRoom from '../GameRoom/GameRoom.js'
 import Recap from '../Recap/Recap.js'
