@@ -8,6 +8,7 @@ class User{
     this.drawing = false
     this.host = false
     this.correct = 0
+    this.sessionId = null
 
   }
   get tagname(){

@@ -4,7 +4,7 @@ import FadeControl from "../FadeControl/FadeControl.js"
 import socket from '../../context/socket.js'
 import classes from './Canvas.module.css'
 
-const Canvas = ({word}) => {
+const Canvas = ({word, savedStrokes}) => {
   const canvasRef = React.useRef(null);
   const parentRef = React.useRef(null);
   const canvasSizeRef = React.useRef(500);
@@ -17,6 +17,7 @@ const Canvas = ({word}) => {
   const [frozen, setFrozen] = useState(false)
   const [fading, setFading] = useState(false)
   const strokeHistory = React.useRef([])
+  const replayedRef = React.useRef(false)
 
   function throttled(delay, fn) {
     let lastCall = 0;
@@ -39,6 +40,33 @@ const Canvas = ({word}) => {
     canvCtx.lineCap = "round";
     setCtx(canvCtx);
   }, [ctx]);
+
+  // Replay strokes sent from server on reconnect (runs once when ctx is ready)
+  useEffect(() => {
+    if (!ctx || !ctx.beginPath || !savedStrokes || !savedStrokes.length || replayedRef.current) return
+    replayedRef.current = true
+    const size = canvasSizeRef.current
+    savedStrokes.forEach(stroke => {
+      if (stroke.type === 'dot') {
+        ctx.fillStyle = stroke.color
+        ctx.beginPath()
+        ctx.arc(stroke.centerx * size, stroke.centery * size, (stroke.thickness * size) / 2, 0, 2 * Math.PI)
+        ctx.fill()
+        ctx.closePath()
+        strokeHistory.current.push(stroke)
+      } else {
+        ctx.strokeStyle = stroke.color
+        ctx.lineWidth = stroke.thickness * size
+        ctx.lineJoin = 'round'
+        ctx.lineCap = 'round'
+        ctx.beginPath()
+        ctx.moveTo(stroke.oldx * size, stroke.oldy * size)
+        ctx.lineTo(stroke.newx * size, stroke.newy * size)
+        ctx.stroke()
+        strokeHistory.current.push(stroke)
+      }
+    })
+  }, [ctx, savedStrokes])
 
   const correctSign = () => {
     ctx.fillStyle = '#0d1117'

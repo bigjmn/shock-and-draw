@@ -4,7 +4,7 @@ import FadeControl from '../FadeControl/FadeControl.js'
 import socket from '../../context/socket.js'
 import classes from './RecCanvas.module.css'
 
-const RecCanvas = ({word}) => {
+const RecCanvas = ({word, savedStrokes}) => {
   const canvasRef = React.useRef(null);
   const parentRef = React.useRef(null);
   const canvasSizeRef = React.useRef(500);
@@ -13,6 +13,7 @@ const RecCanvas = ({word}) => {
   const [fading, setFading] = useState(false)
   const [frozen, setFrozen] = useState(false)
   const strokeHistory = React.useRef([])
+  const replayedRef = React.useRef(false)
 
   const handlePack = (payload) => {
     const size = canvasSizeRef.current
@@ -99,6 +100,19 @@ const RecCanvas = ({word}) => {
       socket.off('passmessage')
     }
   })
+
+  // Replay strokes sent from server on reconnect (runs once when ctx is ready)
+  useEffect(() => {
+    if (!ctx || !ctx.beginPath || !savedStrokes || !savedStrokes.length || replayedRef.current) return
+    replayedRef.current = true
+    savedStrokes.forEach(stroke => {
+      if (stroke.type === 'dot') {
+        handleDot(stroke)
+      } else {
+        handlePack(stroke)
+      }
+    })
+  }, [ctx, savedStrokes])
 
   useEffect(() => {
     let canv = canvasRef.current;

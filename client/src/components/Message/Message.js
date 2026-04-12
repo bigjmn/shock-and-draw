@@ -2,6 +2,12 @@ import classes from './Message.module.css'
 
 const Message = ({message}) => {
 
+  if (message.systemMessage) return (
+    <div className={`${classes.messageHolder} ${classes.systemRow}`}>
+      <p className={classes.messageText}>{message.text}</p>
+    </div>
+  )
+
   if (message.attackMessage) return (
     <div className={`${classes.messageHolder} ${classes.attackRow} ${message.weWereHit ? classes.attackRowHit : classes.attackRowSent}`}>
       <p className={classes.messageText}>

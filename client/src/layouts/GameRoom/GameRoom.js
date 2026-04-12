@@ -93,7 +93,7 @@ const GameRoom = (props) => {
         </div>
 
         <div className={`${classes.canvasPanel} ${activeTab === 'canvas' ? classes.tabVisible : classes.tabHidden}`}>
-          <CanvasRoom isDrawing={props.isDrawing} word={word}/>
+          <CanvasRoom isDrawing={props.isDrawing} word={word} savedStrokes={props.savedStrokes}/>
         </div>
 
         <div className={`${classes.sidePanel} ${activeTab === 'team' ? classes.tabVisible : classes.tabHidden}`}>

@@ -17,6 +17,8 @@ class Team{
 
     this.hitwith = []
     this.opponent = null;
+    this.totalPoints = 0
+    this.strokeHistory = []
 
   }
 
@@ -51,6 +53,7 @@ class Team{
   prepRound(round){
     this.hitwith = []
     this.wordhistory = []
+    this.strokeHistory = []
     this.refreshword()
     for (let i = 0; i < this.users.length; i++){
       this.users[i].correct = 0

@@ -33,6 +33,7 @@ module.exports = function(io, socket){
     io.to(team.room).emit('correct')
     io.to(team.room).emit('correctsound')
     socket.user.correct++
+    team.totalPoints++
     io.emit('takePoints', {color: team.name})
 
     if (team.attackbonus){

@@ -25,6 +25,7 @@ const Room = ({setOnmute, onmute}) => {
   const [totalBluePoints, setTotalBluePoints] = useState(0)
   const [numRounds, setNumRounds] = useState(4)
   const [startTime, setStartTime] = useState(null)
+  const [savedStrokes, setSavedStrokes] = useState(null)
 
   const [redPoints, setRedPoints] = useState(0)
   const [bluePoints, setBluePoints] = useState(0)
@@ -47,6 +48,7 @@ const Room = ({setOnmute, onmute}) => {
       setRedDrawer(data.payload.reddrawer)
       setBlueDrawer(data.payload.bluedrawer)
       setStartTime(data.payload.startTime)
+      setSavedStrokes(null)
       setGamestage('preview')
     })
     socket.on('takeRoundData', (data) => {
@@ -75,6 +77,16 @@ const Room = ({setOnmute, onmute}) => {
       setBlueDrawer(0)
       setGamestage('waiting')
     })
+    socket.on('takeStrokeReplay', (data) => {
+      setSavedStrokes(data.strokes)
+    })
+    socket.on('takeScoreSync', (data) => {
+      setTotalRedPoints(data.redPoints)
+      setTotalBluePoints(data.bluePoints)
+    })
+    socket.on('sessionAssigned', (data) => {
+      localStorage.setItem('sad_session_id', data.sessionId)
+    })
 
     return () => {
       socket.off('previewLaunch')
@@ -82,6 +94,9 @@ const Room = ({setOnmute, onmute}) => {
       socket.off('takeRecap')
       socket.off('endGame')
       socket.off('toWaitRoom')
+      socket.off('takeStrokeReplay')
+      socket.off('takeScoreSync')
+      socket.off('sessionAssigned')
     }
   })
 
@@ -134,7 +149,8 @@ const Room = ({setOnmute, onmute}) => {
     round={round}
     setOnmute={setOnmute}
     onmute={onmute}
-    numRounds={numRounds}/>
+    numRounds={numRounds}
+    savedStrokes={savedStrokes}/>
 ) : (gamestage == 'recap') ?
 (
   <Recap totalRedPoints={totalRedPoints}

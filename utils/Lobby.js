@@ -9,6 +9,10 @@ module.exports = function Lobby(roomid, urlpath, nsp, roomcode){
     teams:null,
     round:0,
     attackmemo:{},
+    gamestage: 'waiting',
+    roundStartTime: null,
+    previewStartTime: null,
+    sessionStore: require('./sessionStore')(),
 
     get socketlist(){
 
@@ -47,6 +51,8 @@ module.exports = function Lobby(roomid, urlpath, nsp, roomcode){
     purgeteams: function(){
       this.users.forEach(user => delete user.team)
       this.teams = null;
+      this.gamestage = 'waiting';
+      this.roundStartTime = null;
     }
 
 

@@ -6,6 +6,7 @@ module.exports = function(io, socket){
     socket.lobby.round++
     if (socket.lobby.round > socket.lobby.numRounds){
       socket.lobby.round = 0
+      socket.lobby.gamestage = 'endgame'
       socket.lobby.purgeteams()
 
       io.emit('endGame')
@@ -25,12 +26,15 @@ module.exports = function(io, socket){
       funfact: require('../utils/funfacts.js')(),
       startTime: Date.now()
     }
+    socket.lobby.previewStartTime = previewPack.startTime
+    socket.lobby.gamestage = 'preview'
     console.log('sending preview')
     io.emit('previewLaunch', {payload:previewPack})
 
   })
 
   socket.on('getRoundData', () => {
+    if (!socket.user.team) return
     var gamePack = {
       isDrawing: socket.user.drawing,
       color: socket.user.team.color,
@@ -50,9 +54,7 @@ module.exports = function(io, socket){
     if (socket.id != socket.lobby.host){
       return
     }
-    var recapPack = {
-
-    }
+    socket.lobby.gamestage = 'recap'
     io.emit('takeRecap')
   })
   // socket.on('getwordhistory', () => {
@@ -64,6 +66,8 @@ module.exports = function(io, socket){
     socket.leave('redroom')
     socket.leave('blueroom')
     socket.user.team = null
+    socket.lobby.gamestage = 'waiting'
+    socket.lobby.midgame = false
 
     console.log(socket.user)
     socket.emit('toWaitRoom')
