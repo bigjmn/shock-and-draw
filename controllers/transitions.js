@@ -55,6 +55,7 @@ module.exports = function(io, socket){
       return
     }
     socket.lobby.gamestage = 'recap'
+    socket.lobby.roundStartTime = null
     io.emit('takeRecap')
   })
   // socket.on('getwordhistory', () => {

@@ -19,27 +19,22 @@ useEffect(() => {
 }, [messages]);
 
   useEffect(() => {
-    socket.on('response', (data) => {
-      setMessages((oldMessages) => [...oldMessages, data])
-
-    })
-    socket.on('attackBounce', () => {
-      socket.emit('giveAttack')
-    })
-    socket.on('takeAttack', (data) => {
+    const handleResponse = (data) => setMessages(old => [...old, data])
+    const handleAttackBounce = () => socket.emit('giveAttack')
+    const handleTakeAttack = (data) => {
       const attackName = attacklist[data.type]?.title ?? 'Unknown Attack'
       const weWereHit = data.color === teamColor
-      setMessages(old => [...old, {
-        attackMessage: true,
-        weWereHit,
-        attackName
-      }])
-    })
+      setMessages(old => [...old, { attackMessage: true, weWereHit, attackName }])
+    }
+
+    socket.on('response', handleResponse)
+    socket.on('attackBounce', handleAttackBounce)
+    socket.on('takeAttack', handleTakeAttack)
 
     return () => {
-      socket.off('response')
-      socket.off('attackBounce')
-      socket.off('takeAttack')
+      socket.off('response', handleResponse)
+      socket.off('attackBounce', handleAttackBounce)
+      socket.off('takeAttack', handleTakeAttack)
     }
   })
 

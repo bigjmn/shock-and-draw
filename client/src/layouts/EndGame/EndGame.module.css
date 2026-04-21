@@ -1,23 +1,151 @@
-.finalScoreContainer{
-  width: 600px;
-  height: 600px;
+.container {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: rgba(255,255,255,0.08);
+  --text: #e6edf3;
+  --muted: #7d8590;
+
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 48px;
+  padding: 40px 24px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  box-sizing: border-box;
 
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.scoresBar{
-  width: 600px;
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Winner banner ── */
+.winnerBanner {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-
+  gap: 8px;
 }
-.scoreContainer{
-  height: 60px;
-  width: 60px;
-  text-align: center;
-  
+
+.eyebrow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.35em;
+  color: var(--muted);
+  margin: 0;
+}
+
+.winnerText {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 10vw, 88px);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin: 0;
+  text-shadow: 0 0 60px currentColor;
+}
+
+.tieNote {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 4px 0 0;
+  font-style: italic;
+}
+
+/* ── Score cards ── */
+.scores {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.scoreCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 24px 48px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease;
+}
+
+.winnerCard {
+  border-color: var(--glow);
+  box-shadow: 0 0 32px color-mix(in srgb, var(--glow) 25%, transparent);
+  transform: scale(1.06);
+}
+
+.teamLabel {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.25em;
+}
+
+.scoreNum {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  line-height: 1;
+}
+
+.crown {
+  font-size: 20px;
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.divider {
+  width: 1px;
+  height: 80px;
+  background: var(--border);
+  margin: 0 32px;
+}
+
+/* ── Footer countdown ── */
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.countdownText {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.progressTrack {
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s linear;
+}
+
+/* ── Mobile ── */
+@media (max-width: 520px) {
+  .scoreCard { padding: 20px 32px; }
+  .scoreNum { font-size: 64px; }
+  .divider { margin: 0 20px; height: 60px; }
 }

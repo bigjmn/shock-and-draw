@@ -18,16 +18,17 @@ const AttackZone = ({maxTime}) => {
 
 
   useEffect(() => {
-    socket.on('takeAttack', (data) => {
+    const handleTakeAttack = (data) => {
       let attackPack = {
         timestamp: data.timestamp,
         color: data.color,
         type: attacklist[data.type]
       }
       setAttacks((oldAttackList) => [...oldAttackList, attackPack])
-    })
+    }
+    socket.on('takeAttack', handleTakeAttack)
     return () => {
-      socket.off('takeAttack')
+      socket.off('takeAttack', handleTakeAttack)
     }
   })
 
